@@ -1,27 +1,27 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_BECOMEADONOR.aspx.cs" Inherits="User.USER_BECOMEADONOR" %>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Page - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts-styles.css">
-    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts.css">
-    <link rel="stylesheet" href="assets/css/Bootstrap-Chat.css">
-    <link rel="stylesheet" href="assets/css/Button-Outlines---Pretty.css">
-    <link rel="stylesheet" href="assets/css/Chat.css">
-    <link rel="stylesheet" href="assets/css/custom-buttons.css">
-    <link rel="stylesheet" href="assets/css/Floating-Button.css">
-    <link rel="stylesheet" href="assets/css/Ludens-basic-login.css">
-    <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css">
-    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Become A Donor</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts-styles.css" />
+    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts.css" />
+    <link rel="stylesheet" href="assets/css/Bootstrap-Chat.css" />
+    <link rel="stylesheet" href="assets/css/Button-Outlines---Pretty.css" />
+    <link rel="stylesheet" href="assets/css/Chat.css" />
+    <link rel="stylesheet" href="assets/css/custom-buttons.css" />
+    <link rel="stylesheet" href="assets/css/Floating-Button.css" />
+    <link rel="stylesheet" href="assets/css/Ludens-basic-login.css" />
+    <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css" />
+    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css" />
 </head>
 
 <body id="page-top">
@@ -33,9 +33,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="chat.html"><i class="fa fa-envelope-o"></i><span>Inbox</span></a><a class="nav-link" href="requestabloodtbl.html"><i class="fa fa-tint"></i><span>Request a Blood</span></a><a class="nav-link active" href="becomeadonortbl.html"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
-                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="USER_CHAT.aspx"><i class="fa fa-envelope-o"></i><span>Inbox</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="USER_REQUEST_A_BLOOD.aspx"><i class="fa fa-tint"></i><span>Request a Blood</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="USER_BECOMEADONOR.aspx"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
