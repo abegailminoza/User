@@ -4,24 +4,25 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts-styles.css">
-    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts.css">
-    <link rel="stylesheet" href="assets/css/Bootstrap-Chat.css">
-    <link rel="stylesheet" href="assets/css/Button-Outlines---Pretty.css">
-    <link rel="stylesheet" href="assets/css/Chat.css">
-    <link rel="stylesheet" href="assets/css/custom-buttons.css">
-    <link rel="stylesheet" href="assets/css/Floating-Button.css">
-    <link rel="stylesheet" href="assets/css/Ludens-basic-login.css">
-    <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css">
-    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css">
+    <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts-styles.css" />
+    <link rel="stylesheet" href="assets/css/Blog---Recent-Posts.css" />
+    <link rel="stylesheet" href="assets/css/Bootstrap-Chat.css" />
+    <link rel="stylesheet" href="assets/css/Button-Outlines---Pretty.css" />
+    <link rel="stylesheet" href="assets/css/Chat.css" />
+    <link rel="stylesheet" href="assets/css/custom-buttons.css" />
+    <link rel="stylesheet" href="assets/css/Floating-Button.css" />
+    <link rel="stylesheet" href="assets/css/Ludens-basic-login.css" />
+    <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css" />
+    <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css" />
 </head>
 
 <body id="page-top">
