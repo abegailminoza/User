@@ -11,7 +11,7 @@ namespace User
 {
 
 
-    public partial class USER_SURVEY_FORM
+    public partial class USER_DONOR_SURVEY_FORM
     {
 
         /// <summary>
