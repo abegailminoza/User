@@ -104,7 +104,7 @@
 </head>
 
 <body style="background: rgb(119,40,32);">
-    <div class="container" style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
+    <form runat="server" class="container" style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
         <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
             <div class="col-sm-12 col-lg-10 col-xl-9 col-xxl-7 bg-white shadow-lg" style="border-radius: 5px;">
                 <div class="p-5">
@@ -114,40 +114,40 @@
                     <div class="text-center">
                         <h4 class="text-dark mb-4" style="font-weight: bold;">Create an Account!</h4>
                     </div>
-                    <form class="user" style="margin-bottom: 34px;">
+                    <div class="user" style="margin-bottom: 34px;">
                         <div class="mb-3">
-                            <input class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" id="FirstName" placeholder="First Name" required="*" style="width: 434.609px;" title="First Name">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="FirstName" placeholder="First Name" required="*" style="width: 434.609px;" title="First Name" />
                         </div>
                         <div class="mb-3">
-                            <input class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" id="MiddleName" placeholder="Middle Name" style="width: 434.609px;" title="Middle Name">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="MiddleName" placeholder="Middle Name" style="width: 434.609px;" title="Middle Name" />
                         </div>
                         <div class="mb-3">
-                            <input class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" id="LastName" placeholder="Last Name" required="*" style="width: 434.609px;" title="Last Name">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="LastName" placeholder="Last Name" required="*" style="width: 434.609px;" title="Last Name" />
                         </div>
                         <div class="mb-3">
-                            <input class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" id="Email" placeholder="Email Address" required="*" style="width: 434.609px;" inputmode="email" title="Email Address">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Email" placeholder="Email Address" required="*" style="width: 434.609px;" inputmode="email" title="Email Address" />
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" placeholder="Password" required="" title="Password">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Password" placeholder="Password" required="" title="Password" />
                             </div>
                             <div class="col-sm-6">
-                                <input class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" placeholder="Confirm Password" required="" title="Repeat Password">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="RepeatPassword" placeholder="Confirm Password" required="" title="Repeat Password" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
                             <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
                         </div>
-                        <button class="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit" style="background: rgb(119,40,32);">Register Account</button>
+                        <asp:Button runat="server" ID="RegisterBtn" OnClick="RegisterBtn_Click" Class="btn btn-primary d-block btn-user w-100" Text="Register Account" UseSubmitBehavior="true" AutoPostBack="true" style="background: rgb(119,40,32);" />
                         <hr>
-                    </form>
+                    </div>
                     <div class="text-center"><a class="small" href="Login.aspx">Already have an account? Login!</a></div>
                 </div>
             </div>
         </div>
 
-    </div>
+    </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>

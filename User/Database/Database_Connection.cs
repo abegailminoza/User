@@ -1,0 +1,225 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
+using System.Web;
+
+namespace User.Database
+{
+    public class Database_Connection
+    {
+        public static string connectionType = "GCloud";
+        readonly string path = ConfigurationManager.ConnectionStrings[connectionType].ConnectionString;
+
+        private MySqlConnection con;
+        private MySqlCommand cmd;
+        private MySqlDataReader rdr;
+        private MySqlDataAdapter da;
+
+        public void DB_Connect()
+        {
+            try
+            {
+                con = new MySqlConnection(path);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Connection Error : " + ex.Message);
+            }
+        }
+
+        public DataTable SampleReapeater()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = "select *, concat(UACC_FIRST, ' ', UACC_LAST) as BLOG_UACC_NAME, UACC_EMAIL as BLOG_UACC_EMAIL from blog_post join user_account on BLOG_UACC_ID=UACC_ID where BLOG_STATUS=true order by BLOG_DATE desc;";
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Sample Repeater Error : " + ex.Message);
+            }
+            return dt;
+        }
+
+        //Insert Into User Logs
+        public bool InsertToUserLogs(string query)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = query;
+                int x = cmd.ExecuteNonQuery();
+                if(x > 0)
+                {
+                    res = true;
+                }
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Insert To User Logs Error : " + ex.Message);
+            }
+            return res;
+        }
+
+
+        //Register User Account
+        public int RegisterUserAccount(user_account ua)
+        {
+            int res = -1;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                //Check if there are duplicate email
+                cmd.CommandText = "select count(*) as duplicate from user_account where UACC_EMAIL='" + ua.UACC_EMAIL + "';";
+                int x = Convert.ToInt32(cmd.ExecuteScalar());
+                if(x <= 0)
+                {
+                    //No Duplicates
+                    cmd.CommandText = string.Format(@"insert into user_account(UACC_FIRST, UACC_MIDDLE, UACC_LAST, UACC_EMAIL, UACC_PASSWORD) 
+                                                values('{0}', '{1}', '{2}', '{3}', '{4}');",
+                                                ua.UACC_FIRST, ua.UACC_MIDDLE, ua.UACC_LAST, ua.UACC_EMAIL, ua.UACC_PASSWORD);
+                    int y = cmd.ExecuteNonQuery();
+                    if(y > 0)
+                    {
+                        //Success
+                        cmd.CommandText = "select UACC_ID from user_account where UACC_EMAIL='" + ua.UACC_EMAIL + "';";
+                        res = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                else
+                {
+                    res = -2;
+                }
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Register User Account Error : " + ex.Message);
+            }
+            return res;
+        }
+
+        //Login User
+        public user_account LoginUser(string query)
+        {
+            user_account ua = new user_account();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = query;
+                rdr = cmd.ExecuteReader();
+                if(rdr.Read() && !rdr.IsDBNull(0))
+                {
+                    ua.UACC_ID = rdr["UACC_ID"].ToString();
+                    ua.UACC_FIRST = rdr["UACC_FIRST"].ToString();
+                    ua.UACC_MIDDLE = rdr["UACC_MIDDLE"].ToString();
+                    ua.UACC_LAST = rdr["UACC_LAST"].ToString();
+                    ua.UACC_EMAIL = rdr["UACC_EMAIL"].ToString();
+                    ua.UACC_PASSWORD = rdr["UACC_PASSWORD"].ToString();
+                    ua.UACC_REQUESTOR = Convert.ToBoolean(rdr["UACC_REQUESTOR"]);
+                    ua.UACC_DONOR = Convert.ToBoolean(rdr["UACC_DONOR"]);
+                    ua.UACC_STATUS = Convert.ToBoolean(rdr["UACC_STATUS"]);
+                }
+                rdr.Close();
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Login User Error : " + ex.Message);
+            }
+            return ua;
+        }
+
+        //Send Blog Post
+        public int PostBlogPost(string content, string id)
+        {
+            int res = -1;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                //query to insert post
+                string query = string.Format(@"insert into blog_post(BLOG_CONTENT, BLOG_UACC_ID) values('{0}', {1});", content, id);
+                cmd.CommandText = query;
+                int x = cmd.ExecuteNonQuery();
+                if(x > 0)
+                {
+                    //Success fully Inserted Post
+                    //get Post ID for Logs
+                    cmd.CommandText = string.Format("select BLOG_ID from blog_post where BLOG_UACC_ID={0} and BLOG_CONTENT='{1}';", id, content);
+                    res = Convert.ToInt32(cmd.ExecuteScalar());
+
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Post Blog Post Error : " + ex.Message);
+            }
+            return res;
+        }
+
+        //public bool Report Post
+        public bool ReportPost(int blogid, string uid)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                //Check if User Already Reported Post
+                cmd.CommandText = string.Format("select BLOG_REPORT from blog_post where BLOG_ID={0};", blogid);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                count++;
+                if(count >= 3)
+                {
+                    cmd.CommandText = string.Format("update blog_post set BLOG_REPORT=3, BLOG_REPORTER='{0}', BLOG_STATUS=false where BLOG_ID={1};", uid, blogid);
+                    int x = cmd.ExecuteNonQuery();
+                    if(x > 0)
+                    {
+                        res = true;
+                    }
+                }
+                else
+                {
+                    cmd.CommandText = string.Format("update blog_post set BLOG_REPORT={0}, BLOG_REPORTER='{1}' where BLOG_ID={2};", count, uid, blogid);
+                    int x = cmd.ExecuteNonQuery();
+                    if(x > 0)
+                    {
+                        res = true;
+                    }
+                }
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Report Post : " + ex.Message);
+            }
+            return res;
+        }
+
+
+    }
+}
