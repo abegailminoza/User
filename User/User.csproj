@@ -255,11 +255,12 @@
     <Content Include="USER_BECOMEADONOR.aspx" />
     <Content Include="USER_BLOGPOST.aspx" />
     <Content Include="USER_CHAT.aspx" />
+    <Content Include="USER_DONOR_SURVEY_FORM.aspx" />
     <Content Include="USER_MANAGEBLOG.aspx" />
     <Content Include="USER_PROFILE.aspx" />
     <Content Include="USER_REGISTER.aspx" />
     <Content Include="USER_REQUEST_A_BLOOD.aspx" />
-    <Content Include="USER_SURVEY_FORM.aspx" />
+    <Content Include="USER_REQUEST_SURVEY_FORM.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -323,6 +324,13 @@
     <Compile Include="USER_CHAT.aspx.designer.cs">
       <DependentUpon>USER_CHAT.aspx</DependentUpon>
     </Compile>
+    <Compile Include="USER_DONOR_SURVEY_FORM.aspx.cs">
+      <DependentUpon>USER_DONOR_SURVEY_FORM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="USER_DONOR_SURVEY_FORM.aspx.designer.cs">
+      <DependentUpon>USER_DONOR_SURVEY_FORM.aspx</DependentUpon>
+    </Compile>
     <Compile Include="USER_MANAGEBLOG.aspx.cs">
       <DependentUpon>USER_MANAGEBLOG.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -351,12 +359,12 @@
     <Compile Include="USER_REQUEST_A_BLOOD.aspx.designer.cs">
       <DependentUpon>USER_REQUEST_A_BLOOD.aspx</DependentUpon>
     </Compile>
-    <Compile Include="USER_SURVEY_FORM.aspx.cs">
-      <DependentUpon>USER_SURVEY_FORM.aspx</DependentUpon>
+    <Compile Include="USER_REQUEST_SURVEY_FORM.aspx.cs">
+      <DependentUpon>USER_REQUEST_SURVEY_FORM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="USER_SURVEY_FORM.aspx.designer.cs">
-      <DependentUpon>USER_SURVEY_FORM.aspx</DependentUpon>
+    <Compile Include="USER_REQUEST_SURVEY_FORM.aspx.designer.cs">
+      <DependentUpon>USER_REQUEST_SURVEY_FORM.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

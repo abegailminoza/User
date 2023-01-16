@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_SURVEY_FORM.aspx.cs" Inherits="User.USER_SURVEY_FORM" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_REQUEST_SURVEY_FORM.aspx.cs" Inherits="User.USER_REQUEST_SURVEY_FORM" %>
 
 <!DOCTYPE html>
 
@@ -118,7 +118,6 @@
                         </ul>
                     </div>
                 </nav>
-                <h1 style="padding-left: 50px;">Posts</h1>
                 <div class="container-fluid d-flex" style="justify-content: center; align-items: center;">
                     <div class="card text-center" style="max-height: 500px; height: 500px; width: 80%;">
                         <div class="card-header">
@@ -134,71 +133,70 @@
                                     <tr>
                                         <td>Family name:</td>
                                         <td>
-                                            <input type="text" id="familyname" name="familyname"></td>
+                                            <asp:TextBox runat="server" type="text" ID="familyname" name="familyname" required="" /></td>
                                         <td>First name:</td>
                                         <td>
-                                            <input type="text" id="firstname" name="firstname"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="firstname" name="firstname" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Middle name:</td>
                                         <td>
-                                            <input type="text" id="midname" name="midname"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="middlename" name="midname" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Date of birth:</td>
                                         <td>
-                                            <input type="date" id="dob" name="don"></td>
+                                            <asp:TextBox runat="server"  type="date" ID="dateofbirth" name="dateofbirth" required="" /></td>
                                         <td>Gender:</td>
                                         <td>
-                                            <input type="text" id="gender" name="gender"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="gender" name="gender" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Age:</td>
                                         <td>
-                                            <input type="text" id="occupation" name="occupation"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="Age" name="occupation" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Blood Type Request:</td>
                                         <td>
-                                            <input type="text" id="occupation" name="occupation"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="bloobredtyperequest" name="occupation" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Residential Address:</td>
                                         <td>
-                                            <input type="text" id="resaddress" name="resaddress"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="resaddress" name="resaddress" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Postal Address:</td>
                                         <td>
-                                            <input type="text" id="posaddress" name="posaddress"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="posaddress" name="posaddress" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td></br>Telephone No.</td>
+                                        <td><br />Telephone No.</td>
                                     </tr>
                                     <tr>
                                         <td>Home:</td>
                                         <td>
-                                            <input type="text" id="home" name="home"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="Home" name="home" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Mobile:</td>
                                         <td>
-                                            <input type="text" id="mobile" name="mobile"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="Mobile" name="mobile" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <input type="text" id="email" name="email"></td>
+                                            <asp:TextBox runat="server"  type="text" ID="Email" name="email" required="" /></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <asp:Button runat="server" CssClass="btn btn-primary" ID="SubmitSurvey" Text="Submit Survey" />
+                            <asp:Button runat="server" CssClass="btn btn-primary" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true"/>
+                            <asp:Button runat="server" CssClass="btn btn-primary" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true"/>
                             <br />
                             <p style="font-style: italic">Disclaimer: Before clicking Submit make sure the form is completely filled up.</p>
-                            <button type="reset" class="btn btn-dark" onclick="SetDate()">Sample 2</button>
-                            <asp:Button runat="server" ID="samp" CssClass="btn btn-danger" Text="Sample" CausesValidation="false" type="reset" />
                         </div>
                     </div>
                 </div>
