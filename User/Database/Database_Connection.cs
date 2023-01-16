@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Ajax.Utilities;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -220,6 +221,111 @@ namespace User.Database
             return res;
         }
 
+        //Insert Blood Request
+        public bool InsertBloodrequest(blood_request br)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
+                int chck = Convert.ToInt32(cmd.ExecuteScalar());
+                if(chck <= 0)
+                {
+                    //walay existing
+                    cmd.CommandText = string.Format("insert into blood_request(BREQ_JSON_SURVEY_FORM, BREQ_UACC_ID) " +
+                        "values('{0}', {1});", br.BREQ_JSON_SURVEY_FORM, br.BREQ_UACC_ID);
+                    int x = cmd.ExecuteNonQuery();
+                    if(x > 0)
+                    {
+                        res = true;
+                    }
+                }
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Insert Blood request Error : " + ex.Message);
+            }
+            return res;
+        }
+
+        //Get User Blood Requests
+        public DataTable GetuserBloodRequests(string id)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select * from blood_request where BREQ_UACC_ID={0}", id);
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Get User Blood Requests : " + ex.Message);
+            }
+            return dt;
+        }
+
+        //Check if there is Existing Un Approved Requests by user
+        public bool CheckUserBloodRequests(string id)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_REQ_STATUS=true;", id);
+                int chck = Convert.ToInt32(cmd.ExecuteScalar());
+                if(chck > 0)
+                {
+                    res = true;
+                }
+                con.Close();
+            }
+            catch(Exception ex)
+            {
+                Debug.Print("Check User Blood request Error : " + ex.Message);
+            }
+            return res;
+        }
+
+        //Search Blood Request on grid table row selected
+        public blood_request SearchBloodRequest(string id)
+        {
+            blood_request br = new blood_request();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select * from blood_request where BREQ_ID={0};", id);
+                rdr = cmd.ExecuteReader();
+                if(rdr.Read() && !rdr.IsDBNull(0))
+                {
+                    br.BREQ_ID = rdr["BREQ_ID"].ToString();
+                    br.BREQ_UACC_ID = rdr["BREQ_UACC_ID"].ToString();
+                    br.BREQ_JSON_SURVEY_FORM = rdr["BREQ_JSON_SURVEY_FORM"].ToString();
+                    br.BREQ_SURVEY_STATUS = Convert.ToBoolean(rdr["BREQ_SURVEY_STATUS"]);
+                    br.BREQ_BLOOD_STATUS = Convert.ToBoolean(rdr["BREQ_BLOOD_STATUS"]);
+                    br.BREQ_REQ_STATUS = Convert.ToBoolean(rdr["BREQ_REQ_STATUS"]);
+                    br.BREQ_DATE = rdr["BREQ_DATE"].ToString();
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Search Blood request Error : " + ex.Message);
+            }
+            return br;
+        }
 
     }
 }
