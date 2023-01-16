@@ -26,7 +26,7 @@
 </head>
 
 <body class="d-flex justify-content-xxl-center align-items-xxl-center" style="background: rgb(119,40,32); height: 100vh;">
-    <div class="container" style="width: 848px;">
+    <form runat="server" class="container" style="width: 848px;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -37,26 +37,26 @@
                             <div class="text-center">
                                 <h4 class="text-dark mb-4">Welcome back to LifePoints!</h4>
                             </div>
-                            <form class="d-flex flex-column user" style="padding-bottom: 0px; margin-bottom: 40px;">
+                            <div class="d-flex flex-column user" style="padding-bottom: 0px; margin-bottom: 40px;">
                                 <div class="mb-3">
-                                    <input class="form-control" type="email" id="exampleInputEmail" placeholder="Enter Email Address..." name="email" style="border-radius: 5.6px !important;" /></div>
+                                    <asp:TextBox runat="server" Class="form-control" type="email" ID="EmailAddress" placeholder="Email Address" name="email" style="border-radius: 5.6px !important;" required="" /></div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="password" id="exampleInputPassword" placeholder="Password" name="password" /></div>
+                                    <asp:TextBox runat="server" Class="form-control" type="password" ID="Password" placeholder="Password" name="password" required="" /></div>
                                 <div class="mb-3">
                                     <div class="custom-control custom-checkbox small"></div>
                                 </div>
                                 <hr style="margin-top: -12px;" />
-                                <button class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(119,40,32); width: 319.609px;">Login</button>
+                                <asp:Button runat="server" Text="Login" ID="LoginBtn" OnClick="LoginBtn_Click" UseSubmitBehavior="true" AutoPostBack="true" Class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(119,40,32); width: 319.609px;" />
                                 <hr style="margin-top: 16px;" />
-                                <a href="#" style="font-size: 10px; text-align: center;">Don't Have an Account? Register.</a>
-                                <a href="USER_REGISTER.aspx" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Admin</a>
-                            </form>
+                                <a href="USER_REGISTER.aspx" style="font-size: 10px; text-align: center;">Don't Have an Account? Register.</a>
+                                <a href="#" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Admin</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
