@@ -57,18 +57,12 @@ namespace User
 
             if(db.CheckUserBloodRequests(ua.UACC_ID))
             {
-<<<<<<< HEAD
                 Debug.Print("Show Button");
-=======
->>>>>>> fb9184b4e09155aeabfd95574e78834265867f0c
                 RequestBloodBtn.Visible = true;
             }
             else
             {
-<<<<<<< HEAD
                 Debug.Print("Do not Show Button");
-=======
->>>>>>> fb9184b4e09155aeabfd95574e78834265867f0c
                 RequestBloodBtn.Visible = false;
             }
         }
