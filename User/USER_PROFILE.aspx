@@ -1,12 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_PROFILE.aspx.cs" Inherits="User.USER_PROFILE" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_PROFILE.aspx.cs" Inherits="User.USER_PROFILE1" %>
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html style="background: #772820;">
+
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Profile</title>
+    <title>Register</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -23,172 +24,130 @@
     <link rel="stylesheet" href="assets/css/Ludens-basic-login.css" />
     <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css" />
     <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css" />
+    <script type="text/javascript">
+        let email = document.getElementById("email")
+        let password = document.getElementById("password")
+        let verifyPassword = document.getElementById("verifyPassword")
+        let submitBtn = document.getElementById("submitBtn")
+        let emailErrorMsg = document.getElementById('emailErrorMsg')
+        let passwordErrorMsg = document.getElementById('passwordErrorMsg')
+
+        function displayErrorMsg(type, msg) {
+            if (type == "email") {
+                emailErrorMsg.style.display = "block"
+                emailErrorMsg.innerHTML = msg
+                submitBtn.disabled = true
+            }
+            else {
+                passwordErrorMsg.style.display = "block"
+                passwordErrorMsg.innerHTML = msg
+                submitBtn.disabled = true
+            }
+        }
+
+        function hideErrorMsg(type) {
+            if (type == "email") {
+                emailErrorMsg.style.display = "none"
+                emailErrorMsg.innerHTML = ""
+                submitBtn.disabled = true
+                if (passwordErrorMsg.innerHTML == "")
+                    submitBtn.disabled = false
+            }
+            else {
+                passwordErrorMsg.style.display = "none"
+                passwordErrorMsg.innerHTML = ""
+                if (emailErrorMsg.innerHTML == "")
+                    submitBtn.disabled = false
+            }
+        }
+
+        // Validate password upon change
+        password.addEventListener("change", function () {
+
+            // If password has no value, then it won't be changed and no error will be displayed
+            if (password.value.length == 0 && verifyPassword.value.length == 0) hideErrorMsg("password")
+
+            // If password has a value, then it will be checked. In this case the passwords don't match
+            else if (password.value !== verifyPassword.value) displayErrorMsg("password", "Passwords do not match")
+
+            // When the passwords match, we check the length
+            else {
+                // Check if the password has 8 characters or more
+                if (password.value.length >= 8)
+                    hideErrorMsg("password")
+                else
+                    displayErrorMsg("password", "Password must be at least 8 characters long")
+            }
+        })
+
+        verifyPassword.addEventListener("change", function () {
+            if (password.value !== verifyPassword.value)
+                displayErrorMsg("password", "Passwords do not match")
+            else {
+                // Check if the password has 8 characters or more
+                if (password.value.length >= 8)
+                    hideErrorMsg("password")
+                else
+                    displayErrorMsg("password", "Password must be at least 8 characters long")
+            }
+        })
+
+        // Validate email upon change
+        email.addEventListener("change", function () {
+            // Check if the email is valid using a regular expression (string@string.string)
+            if (email.value.match(/^[^@]+@[^@]+\.[^@]+$/))
+                hideErrorMsg("email")
+            else
+                displayErrorMsg("email", "Invalid email")
+        });
+    </script>
 </head>
 
-<body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);color: var(--bs-red);">
-            <div class="container-fluid d-flex flex-column p-0"><img src="assets/img/321479999_548324667206662_5830804446592810955_n.png" width="92" height="92" style="margin-top: 30px;"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"></div>
-                    <div class="sidebar-brand-text mx-3"><span>LIFEPOINTS</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="chat.html"><i class="fa fa-envelope-o"></i><span>Inbox</span></a><a class="nav-link" href="requestabloodtbl.html"><i class="fa fa-tint"></i><span>Request a Blood</span></a><a class="nav-link" href="becomeadonortbl.html"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
-                    <li class="nav-item"></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"></div>
-            </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"></div>
-                        </form>
-                        <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <form class="me-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-primary icon-circle"><i class="fas fa-envelope-open text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>Your Blood Request has been approved!</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#"></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>Hi</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg">
-                                                <div class="status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>Hello</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Messages</a>
-                                    </div>
-                                </div>
-                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
-                            </li>
-                            <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">User123</span><img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" width="32" height="32"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="recentblog.html"><i class="fas fa-pen fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Manage Blog Post</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+<body style="background: rgb(119,40,32);">
+    <form runat="server" class="container" style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
+        <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
+            <div class="col-sm-12 col-lg-10 col-xl-9 col-xxl-7 bg-white shadow-lg" style="border-radius: 5px;">
+                <div class="p-5">
+                    <div class="d-flex justify-content-xxl-center align-items-xxl-center">
+                        <img class="img-fluid" src="assets/img/324620533_2986377338333052_6109802263453641588_n.png" width="300">
                     </div>
-                </nav>
-                <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Profile</h3>
-                    <div class="row mb-3">
-                        <div class="col-lg-4">
-                            <div class="card mb-3">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/dogs/icons8-user-60.png" width="160" height="160">
-                                    <div class="mb-3"></div>
-                                </div>
-                            </div>
-                            <div class="card shadow mb-4"></div>
+                    <div class="text-center">
+                        <h4 class="text-dark mb-4" style="font-weight: bold;">Update Account!</h4>
+                    </div>
+                    <div class="user" style="margin-bottom: 34px;">
+                        <div class="mb-3">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_F" placeholder="First Name" required="*" style="width: 434.609px;" title="First Name" />
                         </div>
-                        <div class="col-lg-8">
-                            <div class="row mb-3 d-none">
-                                <div class="col">
-                                    <div class="card text-white bg-primary shadow">
-                                        <div class="card-body">
-                                            <div class="row mb-2">
-                                                <div class="col">
-                                                    <p class="m-0">Peformance</p>
-                                                    <p class="m-0"><strong>65.2%</strong></p>
-                                                </div>
-                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                            </div>
-                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card text-white bg-success shadow">
-                                        <div class="card-body">
-                                            <div class="row mb-2">
-                                                <div class="col">
-                                                    <p class="m-0">Peformance</p>
-                                                    <p class="m-0"><strong>65.2%</strong></p>
-                                                </div>
-                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                                            </div>
-                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="mb-3">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_M" placeholder="Middle Name" style="width: 434.609px;" title="Middle Name" />
+                        </div>
+                        <div class="mb-3">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_L" placeholder="Last Name" required="*" style="width: 434.609px;" title="Last Name" />
+                        </div>
+                        <div class="mb-3">
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_EMAIL" placeholder="Email Address" required="*" style="width: 434.609px;" inputmode="email" title="Email Address" />
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_PASS" placeholder="Password" required="" title="Password" />
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card shadow mb-3">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 fw-bold">Change Password</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>New Password</strong></label><input class="form-control" type="password"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col"></div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Current Password</strong></label><input class="form-control" type="password"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit" style="background: rgb(119,40,32);">Save Changes</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-sm-6">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_RPASS" placeholder="Confirm Password" required="" title="Repeat Password" />
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
+                            <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
+                        </div>
+                        <asp:Button runat="server" ID="UpdateBtn"  Class="btn btn-primary d-block btn-user w-100" Text="Update" UseSubmitBehavior="true" AutoPostBack="true" style="background: rgb(119,40,32);" OnClick="UpdateBtn_Click" />
+                        <hr>
                     </div>
-                    <div class="card shadow mb-5"></div>
+                    <div class="text-center"><a class="small" href="Login.aspx">Already have an account? Login!</a></div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © TechySavor 2022</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
+        </div>
+
+    </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>

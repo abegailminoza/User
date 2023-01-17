@@ -56,11 +56,11 @@ namespace User
 
             if(db.CheckUserBloodRequests(ua.UACC_ID))
             {
-                RequestBloodBtn.Visible = false;
+                RequestBloodBtn.Visible = true;
             }
             else
             {
-                RequestBloodBtn.Visible = true;
+                RequestBloodBtn.Visible = false;
             }
         }
 

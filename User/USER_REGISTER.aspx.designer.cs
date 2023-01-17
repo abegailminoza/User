@@ -15,7 +15,7 @@ namespace User
     {
 
         /// <summary>
-        /// FirstName control.
+        /// FirstName* control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -33,7 +33,7 @@ namespace User
         protected global::System.Web.UI.WebControls.TextBox MiddleName;
 
         /// <summary>
-        /// LastName control.
+        /// LastName* control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -42,7 +42,7 @@ namespace User
         protected global::System.Web.UI.WebControls.TextBox LastName;
 
         /// <summary>
-        /// Email control.
+        /// Email* control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
