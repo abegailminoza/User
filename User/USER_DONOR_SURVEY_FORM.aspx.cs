@@ -11,10 +11,22 @@ namespace User
 {
     public partial class USER_DONOR_SURVEY_FORM : System.Web.UI.Page
     {
+        private Database_Connection db = new Database_Connection();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Convert.ToBoolean(Session["LOGIN"]))
+            {
+                Response.Redirect("~/Default.aspx");
+            }
 
+            if (!Page.IsPostBack)
+            {
+                user_account ua = Session["USER"] as user_account;
+                Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
+            }
         }
+
+
 
         private void GetSurveyInputs()
         {
@@ -78,6 +90,35 @@ namespace User
 
             Session["Surver"] = JsonConvert.SerializeObject(ds);
             Response.Write(JsonConvert.SerializeObject(ds));
+
+            user_account ua = Session["USER"] as user_account;
+            blood_donation bd = new blood_donation();
+
+            bd.BD_JSON_SURVEY_FORM = JsonConvert.SerializeObject(ds);
+            bd.BD_UACC_ID = ua.UACC_ID;
+
+            if (db.InsertBloodDonationSurvey(bd))
+            {
+                //Successfullu Inseryted
+                Response.Write("<script>alert('Successfully Submitted Blood Donation Survey Form and is Pending for approval.')</script>");
+                Server.Transfer("~/USER_BECOMEADONOR.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('An error was encountered while submitting your Survey Form.')</script>");
+
+            }
+
+        }
+
+        protected void SubmitSurvey_Click(object sender, EventArgs e)
+        {
+            GetSurveyInputs();
+        }
+
+        protected void BackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("USER_BECOMEADONOR.aspx");
         }
     }
 }

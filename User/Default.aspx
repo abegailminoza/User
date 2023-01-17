@@ -50,6 +50,7 @@
                                 <hr style="margin-top: 16px;" />
                                 <a href="USER_REGISTER.aspx" style="font-size: 10px; text-align: center;">Don't Have an Account? Register.</a>
                                 <a href="#" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Admin</a>
+                                <a href="BloodBank/BB_LOGIN.aspx" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Blood Bank</a>
                             </div>
                         </div>
                     </div>

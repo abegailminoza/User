@@ -374,7 +374,95 @@ namespace User.Database
             return br;
         }
 
+        //Insert Blood Donation Survey
+        public bool InsertBloodDonationSurvey(blood_donation bd)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BD_REQ_STATUS=true", bd.BD_UACC_ID);
+                int chck = Convert.ToInt32(cmd.ExecuteScalar());
+                if (chck <= 0)
+                {
+                    //walay existing
+                    cmd.CommandText = string.Format("insert into blood_donation(BD_JSON_SURVEY_FORM, BD_UACC_ID) " +
+                        "values('{0}', {1});", bd.BD_JSON_SURVEY_FORM, bd.BD_UACC_ID);
+                    int x = cmd.ExecuteNonQuery();
+                    if (x > 0)
+                    {
+                        res = true;
+                    }
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Insert Blood donation Error : " + ex.Message);
+            }
+            return res;
+        }
 
+
+        //Get User Blood Donation
+        public DataTable GetuserBloodDonation(string id)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE,
+                                                    if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
+                                                    if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
+                                                    if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,
+                                                    if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
+                                                    if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
+                                                    if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
+                                                     from blood_donation where BD_UACC_ID={0} order by BD_DATE desc;", id);
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Get User Blood Donation : " + ex.Message);
+            }
+            return dt;
+        }
+
+        //Search Blood Request on grid table row selected
+        public blood_donation SearchBloodDonation(string id)
+        {
+            blood_donation bd = new blood_donation();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select * from blood_donation where BD_ID={0};", id);
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read() && !rdr.IsDBNull(0))
+                {
+                    bd.BD_ID = rdr["BD_ID"].ToString();
+                    bd.BD_UACC_ID = rdr["BD_UACC_ID"].ToString();
+                    bd.BD_JSON_SURVEY_FORM = rdr["BD_JSON_SURVEY_FORM"].ToString();
+                    bd.BD_SURVEY_STATUS = Convert.ToBoolean(rdr["BD_SURVEY_STATUS"]);
+                    bd.BD_BLOOD_STATUS = Convert.ToBoolean(rdr["BD_BLOOD_STATUS"]);
+                    bd.BD_REQ_STATUS = Convert.ToBoolean(rdr["BD_REQ_STATUS"]);
+                    bd.BD_DATE = rdr["BD_DATE"].ToString();
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Search Blood Donation Error : " + ex.Message);
+            }
+            return bd;
+        }
 
     }
 }
