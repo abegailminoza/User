@@ -116,16 +116,16 @@
                     </div>
                     <div class="user" style="margin-bottom: 34px;">
                         <div class="mb-3">
-                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="FirstName" placeholder="First Name" required="*" style="width: 434.609px;" title="First Name" />
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="FirstName*" placeholder="First Name*" required="*" style="width: 434.609px;" title="First Name" />
                         </div>
                         <div class="mb-3">
                             <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="MiddleName" placeholder="Middle Name" style="width: 434.609px;" title="Middle Name" />
                         </div>
                         <div class="mb-3">
-                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="LastName" placeholder="Last Name" required="*" style="width: 434.609px;" title="Last Name" />
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" ID="LastName*" placeholder="Last Name*" required="*" style="width: 434.609px;" title="Last Name" />
                         </div>
                         <div class="mb-3">
-                            <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Email" placeholder="Email Address" required="*" style="width: 434.609px;" inputmode="email" title="Email Address" />
+                            <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Email*" placeholder="Email Address*" required="*" style="width: 434.609px;" inputmode="email" title="Email Address" />
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-6 mb-3 mb-sm-0">

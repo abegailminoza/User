@@ -118,6 +118,44 @@ namespace User.Database
             }
             return res;
         }
+        
+        //Update User Account
+        public int UpdateUserAccount(user_account ub)
+        {
+
+            int res = -1;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                
+                int x = Convert.ToInt32(cmd.ExecuteScalar());
+                if (x <= 0)
+                {
+                    cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5}", 
+                        ub.UACC_FIRST,ub.UACC_MIDDLE,ub.UACC_LAST,ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
+                    int y = cmd.ExecuteNonQuery();
+
+                    if (y > 0)
+                    {    
+                        res = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                else
+                {
+                    res = -2;
+                }
+                con.Close();
+            
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Register User Account Error : " + ex.Message);
+            }
+            return res;
+        }
+
 
         //Login User
         public user_account LoginUser(string query)
@@ -335,6 +373,8 @@ namespace User.Database
             }
             return br;
         }
+
+
 
     }
 }
