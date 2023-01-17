@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -56,11 +57,13 @@ namespace User
 
             if(db.CheckUserBloodRequests(ua.UACC_ID))
             {
-                RequestBloodBtn.Visible = false;
+                Debug.Print("Show Button");
+                RequestBloodBtn.Visible = true;
             }
             else
             {
-                RequestBloodBtn.Visible = true;
+                Debug.Print("Do not Show Button");
+                RequestBloodBtn.Visible = false;
             }
         }
 

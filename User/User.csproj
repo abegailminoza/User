@@ -252,6 +252,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Login.aspx" />
+    <Content Include="User\hello.aspx" />
     <Content Include="USER_BECOMEADONOR.aspx" />
     <Content Include="USER_BLOGPOST.aspx" />
     <Content Include="USER_CHAT.aspx" />
@@ -302,6 +303,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\hello.aspx.cs">
+      <DependentUpon>hello.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\hello.aspx.designer.cs">
+      <DependentUpon>hello.aspx</DependentUpon>
     </Compile>
     <Compile Include="USER_BECOMEADONOR.aspx.cs">
       <DependentUpon>USER_BECOMEADONOR.aspx</DependentUpon>

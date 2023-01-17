@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -261,7 +262,14 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select * from blood_request where BREQ_UACC_ID={0}", id);
+                cmd.CommandText = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE,
+                                                    if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
+                                                    if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
+                                                    if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
+                                                    if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
+                                                    if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
+                                                    if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_BLOOD_STATUS
+                                                     from blood_request where BREQ_UACC_ID={0} order by BREQ_DATE desc;", id);
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
                 con.Close();
@@ -287,6 +295,7 @@ namespace User.Database
                 if(chck > 0)
                 {
                     res = true;
+                    Debug.Print("Result : " + res);
                 }
                 con.Close();
             }
