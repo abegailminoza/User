@@ -39,7 +39,6 @@ bld/
 #wwwroot/
 
 User/obj/
-User/bin/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
