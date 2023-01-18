@@ -130,8 +130,6 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-
-                if (email == ub.UACC_EMAIL)
                 {
                     cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5};",
                        ub.UACC_FIRST, ub.UACC_MIDDLE, ub.UACC_LAST, ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
