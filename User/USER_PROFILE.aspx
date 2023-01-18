@@ -7,7 +7,7 @@
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Register</title>
+    <title>Update Profile</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -142,7 +142,7 @@
                         <asp:Button runat="server" ID="UpdateBtn"  Class="btn btn-primary d-block btn-user w-100" Text="Update" UseSubmitBehavior="true" AutoPostBack="true" style="background: rgb(119,40,32);" OnClick="UpdateBtn_Click" />
                         <hr>
                     </div>
-                    <div class="text-center"><a class="small" href="Login.aspx">Already have an account? Login!</a></div>
+                    <div class="text-center"><a class="small" href="USER_BLOGPOST.aspx">Go Back</a></div>
                 </div>
             </div>
         </div>

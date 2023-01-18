@@ -46,10 +46,18 @@ namespace User
             user_account ua= Session["USER"] as user_account;
             user_account ub = new user_account();
 
-            if (UPD_PASS.Text != UPD_RPASS.Text)
+            string npword = UPD_PASS.Text;
+            string rpword = UPD_RPASS.Text;
+            string email = ua.UACC_EMAIL;
+
+            bool isSuccess = false;
+            if (npword == "" || rpword == "")
             {
-                Response.Write("<script>alert('Password Does Not Match')</script>");
-                ub = null;
+                //Missing Fields
+                Response.Write("<script>alert('Missing Fields.')</script>");
+            }
+            else if(npword!=rpword){
+                Response.Write("<script>alert('Password Does Not Match.')</script>");
             }
             else {
             
@@ -57,41 +65,27 @@ namespace User
             ub.UACC_FIRST = UPD_F.Text;
             ub.UACC_MIDDLE = UPD_M.Text;
             ub.UACC_LAST = UPD_L.Text;
-            ua.UACC_EMAIL = UPD_EMAIL.Text;
+            ub.UACC_EMAIL = UPD_EMAIL.Text;
             ub.UACC_PASSWORD = UPD_PASS.Text;
-            bool isSuccess = false;
-            string msg = "";
-            int res = db.UpdateUserAccount(ua);
+
+
+                int res = db.UpdateUserAccount(ub,email);
+                //1 if Success
+    
+                //-1 if Database
                 switch (res)
                 {
-                    case -1: //Database error
-                        msg = "There has been an error with the database.";
-                        break;
-                    case -2: //Duplicate Email
-                        msg = "Email address already exists. Try again.";
-                        break;
-                    default: //Success
+                    case 1:
+                        Response.Write("<script>alert('Profile Updated Successfully.')</script>");
                         isSuccess = true;
-                        msg = "Account Successfully Registered. You may now proceed to login.";
-
-                        //Insert to User Account Logs
-                        user_logs ul = new user_logs();
-                        ul.ULOG_UACC_ID = res.ToString();
-                        ul.ULOG_EVENT = "Account Updated";
-                        string query = string.Format("insert into user_logs(ULOG_EVENT, ULOG_UACC_ID) values('{0}', {1});", ul.ULOG_EVENT, ul.ULOG_UACC_ID);
-                        bool logs = db.InsertToUserLogs(query);
-                        if (logs)
-                        {
-                            //Response.Write("<script>alert('Success Insert to Logs')</script>");
-                            //Response.Redirect("~/Default.aspx");
-                        }
                         break;
-                }
-                Response.Write("<script>alert('" + msg + "')</script>");
-                if (isSuccess)
-                {
-                    //Redirect To Login Page
-                    Server.Transfer("~/Default.aspx");
+                    case -2:
+                        Response.Write("<script>alert('Email already exist')</script>");
+                        break;
+
+                    case -1:
+                        Response.Write("<script>alert('Database Error.')</script>");
+                        break;
                 }
 
             }
