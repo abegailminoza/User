@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_DONOR_SURVEY_FORM.aspx.cs" Inherits="User.USER_DONOR_SURVEY_FORM" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_DONOR_SURVEY_FORM_VIEW.aspx.cs" Inherits="User.USER_DONOR_SURVEY_FORM_VIEW" %>
 
 <!DOCTYPE html>
 
@@ -51,10 +51,20 @@
             alert("2023-01-14");
             document.getElementById("dob").value = "14-01-2023";
         }
+        function SetAttributesReadOnly() {
+            var items = document.getElementsByTagName("input");
+
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].type !== "button") {
+
+                    items[i].setAttribute("disabled", "");
+                }
+            }
+        }
     </script>
 </head>
 
-<body id="page-top">
+<body id="page-top"  onload="SetAttributesReadOnly()">
     <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32); color: var(--bs-red);">
             <div class="container-fluid d-flex flex-column p-0">
@@ -141,7 +151,7 @@
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="recentblog.html"><i class="fas fa-pen fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Manage Blog Post</a><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="profile.html"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="recentblog.html"><i class="fas fa-pen fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Manage Blog Post</a><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
                                 </div>
                             </li>
                         </ul>
@@ -186,7 +196,7 @@
                                     <tr>
                                         <td>Date of birth:</td>
                                         <td>
-                                            <input type="date" id="dob" name="dob" required="" value=" <%=ViewState["dob"] %>" /></td>
+                                            <input type="text" id="dob" name="dob" required="" value=" <%=ViewState["dob"] %>" /></td>
                                         <td>Gender:</td>
                                         <td>
                                             <input type="text" id="gender" name="gender" required="" value=" <%=ViewState["gender"] %>" /></td>
@@ -214,21 +224,20 @@
                                     <tr>
                                         <td>Home:</td>
                                         <td>
-                                            <input type="number" id="home" name="home" required="" value=" <%= Convert.ToInt32(ViewState["home"]) %>" /></td>
+                                            <input type="text" id="home" name="home" required="" value=" <%= ViewState["home"] %>" /></td>
                                         <td>Work:</td>
                                         <td>
-                                            <input type="number" id="work" name="work" required="" value=" <%= Convert.ToInt32(ViewState["work"]) %>" /></td>
+                                            <input type="text" id="work" name="work" required="" value=" <%= ViewState["work"] %>" /></td>
                                     </tr>
                                     <tr>
                                         <td>Mobile:</td>
                                         <td>
-                                            <input type="number" id="mobile" name="mobile" required="" value=" <%= Convert.ToInt32(ViewState["mobile"]) %>" /></td>
+                                            <input type="text" id="mobile" name="mobile" required="" value=" <%= ViewState["mobile"] %>" /></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <input type="text" id="email" name="email" required="" value=" <%=ViewState["email"] %>" />
-                                        </td>
+                                            <input type="text" id="email" name="email" required="" value=" <%=ViewState["email"] %>" /></td>
                                     </tr>
                                 </table>
                                 <p style="font-size: 25px; font-style: bold; margin-left: -30%">
@@ -249,41 +258,41 @@
                                         <td>1.1</td>
                                         <td>Are you feeling well and in good health today?</td>
                                         <td>
-                                            <input type="radio" id="1.1Y" name="rd11" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" type="radio" ID="rd11y" GroupName="rd11" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.1N" name="rd11" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" type="radio" ID="rd11n" GroupName="rd11" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.2</td>
                                         <td>In the last 4 hours, have you had a meal or snack?</td>
                                         <td>
-                                            <input type="radio" id="1.2Y" name="rd12" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd12" type="radio" ID="rd12y" name="rd12" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.2N" name="rd12" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd12" type="radio" ID="rd12n" name="rd12" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.3</td>
                                         <td>Have you already given blood in the last 16 weeks?</td>
                                         <td>
-                                            <input type="radio" id="1.3Y" name="rd13" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd13" type="radio" ID="rd13y" name="rd13" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.3N" name="rd13" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd13" type="radio" ID="rd13n" name="rd13" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.4</td>
                                         <td>Have you got a chesty cough, sore throat or active cold sore?</td>
                                         <td>
-                                            <input type="radio" id="1.4Y" name="rd14" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd14" type="radio" ID="rd14y" name="rd14" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.4N" name="rd14" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd14" type="radio" ID="rd14n" name="rd14" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.5</td>
                                         <td>Are you pregnant or breastfeeding?</td>
                                         <td>
-                                            <input type="radio" id="1.5Y" name="rd15" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd15" type="radio" ID="rd15y" name="rd15" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.5N" name="rd15" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd15" type="radio" ID="rd15n" name="rd15" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.6</td>
@@ -293,17 +302,17 @@
                                         <td></td>
                                         <td>a &nbsp;&nbsp;&nbsp;Chest pains, heart disease/surgery or stroke?</td>
                                         <td>
-                                            <input type="radio" id="1.6aY" name="rd16a" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16a" type="radio" ID="rd16ay" name="rd16a" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.6aN" name="rd16a" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16a" type="radio" ID="rd16an" name="rd16a" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>b &nbsp;&nbsp;&nbsp;Lung disease, tuberculosis or asthma?</td>
                                         <td>
-                                            <input type="radio" id="1.6bY" name="rd16b" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16b" type="radio" ID="rd16by" name="rd16b" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.6bN" name="rd16b" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16b" type="radio" ID="rd16bn" name="rd16b" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -311,17 +320,17 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or a bleeding gastric ulcer or duodenal ulcer?
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.6cY" name="rd16c" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16c" type="radio" ID="rd16cy" name="rd16c" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.6cN" name="rd16c" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16c" type="radio" ID="rd16cn" name="rd16c" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>d &nbsp;&nbsp;&nbsp;Diabetes, thyroid disease, kidney disease, epilipsy (fits)?</td>
                                         <td>
-                                            <input type="radio" id="1.6drd17Y" name="rd16d" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16d" type="radio" ID="rd16dy" name="rd16d" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.6drd17N" name="rd16d" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd16d" type="radio" ID="rd16dn" name="rd16d" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.7</td>
@@ -329,9 +338,9 @@
                                             healthcare professional or are you waiting to see one<br />
                                             (except for routine screening appointments)?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.7Y" name="rd17" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd17" type="radio" ID="rd17y" name="rd17" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.7N" name="rd17" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd17" type="radio" ID="rd17n" name="rd17" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.8</td>
@@ -343,9 +352,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or taken any medication?
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.8aY" name="rd18a" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd18a" type="radio" ID="rd18ay" name="rd18a" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.8aN" name="rd18a" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd18a" type="radio" ID="rd18an" name="rd18a" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -354,9 +363,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;involved in a serious accident?
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.8bY" name="rd18b" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd18b" type="radio" ID="rd18by" name="rd18b" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.8bN" name="rd18b" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd18b" type="radio" ID="rd18bn" name="rd18b" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.9</td>
@@ -370,9 +379,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you been given hepatitis B vaccination?
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9aY" name="rd19a" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19a" type="radio" ID="rd19ay" name="rd19a" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9aN" name="rd19a" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19a" type="radio" ID="rd19an" name="rd19a" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -380,9 +389,9 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;may have hepatitis now?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9bY" name="rd19b" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19b" type="radio" ID="rd19by" name="rd19b" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9bN" name="rd19b" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19b" type="radio" ID="rd19bn" name="rd19b" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -391,27 +400,27 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;treatment?<br>
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9cY" name="rd19c" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19c" type="radio" ID="rd19cy" name="rd19c" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.9cN" name="rd19c" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd19c" type="radio" ID="rd19cn" name="rd19c" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.10</td>
                                         <td>In the past 12 months, have you or your sexual partner<br />
                                             received blood transfusion?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.10Y" name="rd110" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd110" type="radio" ID="rd110y" name="rd110" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.10N" name="rd110" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd110" type="radio" ID="rd110n" name="rd110" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.11</td>
                                         <td>Have you or your sexual partner been treated with human or<br />
                                             animal blood products or clotting factors?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.11Y" name="rd111" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd111" type="radio" ID="rd111y" name="rd111" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.11N" name="rd111" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd111" type="radio" ID="rd111n" name="rd111" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.12</td>
@@ -419,9 +428,9 @@
                                             pituitary gonadotrophin (fertility medicine) or seen a neurosurgeon<br />
                                             or neurologist?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.12Y" name="rd112" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd112" type="radio" ID="rd112y" name="rd112" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.12N" name="rd112" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd112" type="radio" ID="rd112n" name="rd112" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">1.13</td>
@@ -429,9 +438,9 @@
                                             condition or been diagnosed with Creutzfeldt-Jacob Disease or<br />
                                             'mad cow disease'?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.13Y" name="rd113" value="yes" required=""></td>
+                                            <asp:RadioButton runat="server" GroupName="rd113" type="radio" ID="rd113y" name="rd113" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.13N" name="rd113" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd113" type="radio" ID="rd113n" name="rd113" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.14</td>
@@ -443,18 +452,18 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with travel?
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.14aY" name="rd114a" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd114a" type="radio" ID="rd114ay" name="rd114a" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.14aN" name="rd114a" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd114a" type="radio" ID="rd114an" name="rd114a" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>b &nbsp;&nbsp;&nbsp;Visited any malarial area in the last 12 months?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.14bY" name="rd114b" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd114b" type="radio" ID="rd114by" name="rd114b" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="1.14bN" name="rd114b" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd114b" type="radio" ID="rd114bn" name="rd114b" value="no" required="" /></td>
                                     </tr>
                                 </table>
                                 <table style="text-align: left; width: 51%; margin: auto">
@@ -463,7 +472,7 @@
                                         <td>When did you last travel to another region or country<br />
                                             (in months/years)?</td>
                                         <td style="vertical-align: top">
-                                            <input type="text" id="1.15" name="rd115" required="" /></td>
+                                            <input type="text" id="1.15" name="rd115" required="" value=" <%=ViewState["rd115"] %>" /></td>
                                     </tr>
                                 </table>
                                 <p style="font-size: 25px; font-style: bold; margin-left: -32%">
@@ -481,27 +490,27 @@
                                         <td>2.1</td>
                                         <td>Is your reason for donating blood to undergo an HIV test?</td>
                                         <td>
-                                            <input type="radio" id="2.1Y" name="rd21" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd21" type="radio" ID="rd21y" name="rd21" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="2.1N" name="rd21" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd21" type="radio" ID="rd21n" name="rd21" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>2.2</td>
                                         <td>Have you ever been tested for HIV?</td>
                                         <td>
-                                            <input type="radio" id="2.2Y" name="rd22" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd22" type="radio" ID="rd22y" name="rd22" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="2.2N" name="rd22" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd22" type="radio" ID="rd22n" name="rd22" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top;">2.3</td>
                                         <td>If "Yes" what was the reason?<br />
-                                            <input type="radio" id="2.3VOL" name="rd23" value="voluntary" required="" onclick="CleanInputField()" /> Voluntary
-                                            <input type="radio" id="2.3EMP" name="rd23" value="employment" required="" onclick="CleanInputField()" /> Employment
-                                            <input type="radio" id="2.3INS" name="rd23" value="insurance" required="" onclick="CleanInputField()" /> Insurance
-                                            <input type="radio" id="2.3MED" name="rd23" value="medadvice" required="" onclick="CleanInputField()" /> Medical Advice<br />
-                                            Others 
-                                            <input type="text" id="2.3OTH" name="rd23" required="" onchange="UncheckRadioIfTextIsClicked()" />
+                                            <asp:RadioButton runat="server" GroupName="rd23" type="radio" ID="rd23VOL" name="rd23" value="voluntary" required="" onclick="CleanInputField()" />Voluntary
+                                            <asp:RadioButton runat="server" GroupName="rd23" type="radio" ID="rd23EMP" name="rd23" value="employment" required="" onclick="CleanInputField()" />Employment
+                                            <asp:RadioButton runat="server" GroupName="rd23" type="radio" ID="rd23INS" name="rd23" value="insurance" required="" onclick="CleanInputField()" />Insurance
+                                            <asp:RadioButton runat="server" GroupName="rd23" type="radio" ID="rd23MED" name="rd23" value="medadvice" required="" onclick="CleanInputField()" />Medical Advice<br />
+                                            Others
+                                            <input type="text" id="2.3OTH" name="rd23" required="" onchange="UncheckRadioIfTextIsClicked()" value="<%=ViewState["rd23"] %>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -510,9 +519,9 @@
                                             background you do not know, with or without a condom?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.4Y" name="rd24" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd24" type="radio" ID="rd24y" name="rd24" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.4N" name="rd24" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd24" type="radio" ID="rd24n" name="rd24" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.5</td>
@@ -520,9 +529,9 @@
                                             in return for sex?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.5Y" name="rd25" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd25" type="radio" ID="rd25y" name="rd25" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.5N" name="rd25" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd25" type="radio" ID="rd25n" name="rd25" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.6</td>
@@ -530,9 +539,9 @@
                                             e.g.syphilis, gonorrhoea, genital herpes, genital ulcer, VD, or 'drop'?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.6Y" name="rd26" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd26" type="radio" ID="rd26y" name="rd26" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.6N" name="rd26" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd26" type="radio" ID="rd26n" name="rd26" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>2.7</td>
@@ -543,37 +552,37 @@
                                         <td>a &nbsp;&nbsp;&nbsp;Has there been any change in your marital status?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7aY" name="rd27a" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27a" type="radio" ID="rd27ay" name="rd27a" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7aN" name="rd27a" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27a" type="radio" ID="rd27an" name="rd27a" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>b &nbsp;&nbsp;&nbsp;If sexually active, do you think any of the above questions (2.1-2.6)<br />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;may be true for your sexual partner?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7bY" name="rd27b" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27b" type="radio" ID="rd27by" name="rd27b" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7bN" name="rd27b" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27b" type="radio" ID="rd27bn" name="rd27b" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>c &nbsp;&nbsp;&nbsp;Have you been a victim of sexual abuse?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7cY" name="rd27c" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27c" type="radio" ID="rd27cy" name="rd27c" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.7cN" name="rd27c" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd27c" type="radio" ID="rd27cn" name="rd27c" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.8</td>
-                                        <td>Have you or your sexual partner suffered from night sweats,<br>
-                                            unintentional weight loss, diarrhea or swollen glands?<br>
+                                        <td>Have you or your sexual partner suffered from night sweats,<br />
+                                            unintentional weight loss, diarrhea or swollen glands?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.8Y" name="rd28" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd28" type="radio" ID="rd28y" name="rd28" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.8N" name="rd28" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd28" type="radio" ID="rd28n" name="rd28" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.9</td>
@@ -581,9 +590,9 @@
                                             drugs including body-building drugs or cosmetics (even if this was<br />
                                             only once or a long time ago)?</td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.9Y" name="rd29" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd29" type="radio" ID="rd29y" name="rd29" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.9N" name="rd29" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd29" type="radio" ID="rd29n" name="rd29" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.10</td>
@@ -591,19 +600,19 @@
                                             last 12 months have you had any immunizations, vaccinations or jabs?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.10Y" name="rd210" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd210" type="radio" ID="rd210y" name="rd210" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.10N" name="rd210" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd210" type="radio" ID="rd210n" name="rd210" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: top">2.11</td>
-                                        <td>Have you ever been refused as a blood donor, or told not to donate<br>
-                                            blood?<br>
+                                        <td>Have you ever been refused as a blood donor, or told not to donate<br />
+                                            blood?<br />
                                         </td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.11Y" name="rd211" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd211" type="radio" ID="rd211y" name="rd211" value="yes" required="" /></td>
                                         <td style="vertical-align: top">
-                                            <input type="radio" id="2.11N" name="rd211" value="no" required="" /></td>
+                                            <asp:RadioButton runat="server" GroupName="rd211" type="radio" ID="rd211n" name="rd211" value="no" required="" /></td>
                                     </tr>
                                 </table>
                                 <p style="font-size: 25px; font-style: bold; margin-left: -35%">
@@ -649,10 +658,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" ID="SubmitSurvey" Text="Submit Survey" OnClick="SubmitSurvey_Click" />
-                            <br />
-                            <p style="font-style: italic">Disclaimer: Before clicking Submit make sure the form is completely filled up.</p>
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true"/>
+                            <a class="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" id="BackButton" href="USER_BECOMEADONOR.aspx" >Back</a>
                         </div>
                     </div>
                 </div>

@@ -25,13 +25,13 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
+    <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);color: var(--bs-red);">
-            <div class="container-fluid d-flex flex-column p-0"><img src="assets/img/321479999_548324667206662_5830804446592810955_n.png" width="92" height="92" style="margin-top: 30px;"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="container-fluid d-flex flex-column p-0"><img src="assets/img/321479999_548324667206662_5830804446592810955_n.png" width="92" height="92" style="margin-top: 30px;" /><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span>LIFEPOINTS</span></div>
                 </a>
-                <hr class="sidebar-divider my-0">
+                <hr class="sidebar-divider my-0" />
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="USER_CHAT.aspx"><i class="fa fa-envelope-o"></i><span>Inbox</span></a></li>
@@ -45,17 +45,17 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"></div>
-                        </form>
+                        </div>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <form class="me-auto navbar-search w-100">
+                                    <div class="me-auto navbar-search w-100">
                                         <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
                                             <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -106,61 +106,29 @@
                             </li>
                         </ul>
                     </div>
-                </nav><button class="btn btn-primary" type="button" style="background: rgb(119,40,32);height: 46px;width: 204.406px;margin: 37px;padding: 12px 12px;">Become a Blood Donor</button>
+                </nav>
+                <a class="btn btn-primary" type="button" href="USER_DONOR_SURVEY_FORM.aspx" style="background: rgb(119,40,32);height: 46px;width: 204.406px;margin: 37px;padding: 12px 12px;">Become a Blood Donor</a>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4" style="height: 31.5938px;margin: 32px;">Your Blood Donation history</h3>
+                    <h3 class="text-dark mb-4" style="height: 31.5938px; margin: 32px;">Your blood request history</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold"></p>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Donor Transaction ID</th>
-                                            <th>Blood Type</th>
-                                            <th>Status</th>
-                                            <th>Date of Transaction</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2324</td>
-                                            <td>A+</td>
-                                            <td>Complete</td>
-                                            <td>Male</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1335</td>
-                                            <td>A+</td>
-                                            <td>Complete</td>
-                                            <td>Male</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2444</td>
-                                            <td>A+</td>
-                                            <td>Rejected</td>
-                                            <td>Male</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3323</td>
-                                            <td>A+</td>
-                                            <td>Complete</td>
-                                            <td>41</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3232</td>
-                                            <td>A+</td>
-                                            <td>Pending</td>
-                                            <td>28</td>
-                                        </tr>
-                                        <tr></tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr></tr>
-                                    </tfoot>
-                                </table>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="max-height: 410px; overflow: auto;">
+                                <asp:GridView runat="server" ID="GridUserBloodDonation" Visible="true" AutoGenerateColumns="false" Width="100%"
+                                    BorderColor="Transparent" OnSelectedIndexChanged="GridUserBloodDonation_SelectedIndexChanged"
+                                    AutoPostBack="false"
+                                    AllowSorting="true">
+                                    <Columns>
+                                        <asp:BoundField HeaderText="ID" DataField="BD_ID" />
+                                        <asp:BoundField HeaderText="DONATOR" DataField="BD_UACC_ID" />
+                                        <asp:BoundField HeaderText="SURVEY STATUS" DataField="BD_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="BLOOD STATUS" DataField="BD_BLOOD_STATUS" />
+                                        <asp:BoundField HeaderText="DATE" DataField="BD_DATE" />
+                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
+                                    </Columns>
+                                </asp:GridView>
                             </div>
                         </div>
                     </div>
@@ -172,7 +140,7 @@
                 </div>
             </footer>
         </div>
-    </div>
+    </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>

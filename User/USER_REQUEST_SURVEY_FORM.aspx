@@ -193,8 +193,8 @@
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <asp:Button runat="server" CssClass="btn btn-primary" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true"/>
-                            <asp:Button runat="server" CssClass="btn btn-primary" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true"/>
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true"/>
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true"/>
                             <br />
                             <p style="font-style: italic">Disclaimer: Before clicking Submit make sure the form is completely filled up.</p>
                         </div>
