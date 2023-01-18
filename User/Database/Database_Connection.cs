@@ -291,7 +291,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {
@@ -404,7 +404,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BD_REQ_STATUS=true", bd.BD_UACC_ID);
+                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and (BD_SURVER_STATUS = false or BD_BLOOD_STATUS=false) and BD_REQ_STATUS=true", bd.BD_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {

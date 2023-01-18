@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -99,6 +100,10 @@ namespace User
 
             if (db.InsertBloodDonationSurvey(bd))
             {
+                string query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('User ', UACC_FIRST, ' ', UACC_LAST, ' Submitted Donation Request'), {0}, '{1}' from user_account
+                                            where UACC_ID={2};", ua.UACC_ID, ua.UACC_FIRST + " " + ua.UACC_LAST, ua.UACC_ID);
+                bool logs = db.InsertToUserLogs(query);
                 //Successfullu Inseryted
                 Response.Write("<script>alert('Successfully Submitted Blood Donation Survey Form and is Pending for approval.')</script>");
                 Server.Transfer("~/USER_BECOMEADONOR.aspx");
