@@ -310,6 +310,31 @@ namespace User.Database
             return res;
         }
 
+        public bool ClickBloodrequest(blood_request br)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
+                int chck = Convert.ToInt32(cmd.ExecuteScalar());
+                if (chck <= 0)
+                {
+                   
+                        res = true;
+                    
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Blood request Error : " + ex.Message);
+            }
+            return res;
+        }
+
         //Get User Blood Requests
         public DataTable GetuserBloodRequests(string id)
         {
@@ -423,7 +448,30 @@ namespace User.Database
             }
             return res;
         }
+        public bool ClickDonationrequest(blood_donation br)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BD_REQ_STATUS=true", br.BD_UACC_ID);
+                int chck = Convert.ToInt32(cmd.ExecuteScalar());
+                if (chck <= 0)
+                {
 
+                    res = true;
+
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Blood request Error : " + ex.Message);
+            }
+            return res;
+        }
 
         //Get User Blood Donation
         public DataTable GetuserBloodDonation(string id)
