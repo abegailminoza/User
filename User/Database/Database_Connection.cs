@@ -48,7 +48,7 @@ namespace User.Database
                 da.Fill(dt);
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Sample Repeater Error : " + ex.Message);
             }
@@ -66,13 +66,13 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = query;
                 int x = cmd.ExecuteNonQuery();
-                if(x > 0)
+                if (x > 0)
                 {
                     res = true;
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Insert To User Logs Error : " + ex.Message);
             }
@@ -92,14 +92,14 @@ namespace User.Database
                 //Check if there are duplicate email
                 cmd.CommandText = "select count(*) as duplicate from user_account where UACC_EMAIL='" + ua.UACC_EMAIL + "';";
                 int x = Convert.ToInt32(cmd.ExecuteScalar());
-                if(x <= 0)
+                if (x <= 0)
                 {
                     //No Duplicates
                     cmd.CommandText = string.Format(@"insert into user_account(UACC_FIRST, UACC_MIDDLE, UACC_LAST, UACC_EMAIL, UACC_PASSWORD) 
                                                 values('{0}', '{1}', '{2}', '{3}', '{4}');",
                                                 ua.UACC_FIRST, ua.UACC_MIDDLE, ua.UACC_LAST, ua.UACC_EMAIL, ua.UACC_PASSWORD);
                     int y = cmd.ExecuteNonQuery();
-                    if(y > 0)
+                    if (y > 0)
                     {
                         //Success
                         cmd.CommandText = "select UACC_ID from user_account where UACC_EMAIL='" + ua.UACC_EMAIL + "';";
@@ -112,16 +112,17 @@ namespace User.Database
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Register User Account Error : " + ex.Message);
             }
             return res;
         }
-        
+
         //Update User Account
-        public int UpdateUserAccount(user_account ub)
+        public int UpdateUserAccount(user_account ub,string email)
         {
+
 
             int res = -1;
             try
@@ -129,29 +130,48 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select count(*) as duplicate from user_account where UACC_EMAIL='" + ub.UACC_EMAIL + "';";
-                int x = Convert.ToInt32(cmd.ExecuteScalar());
-                if (x == 1)
                 {
-                    cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5}", 
-                        ub.UACC_FIRST,ub.UACC_MIDDLE,ub.UACC_LAST,ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
-                    int y = cmd.ExecuteNonQuery();
+                    cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5};",
+                       ub.UACC_FIRST, ub.UACC_MIDDLE, ub.UACC_LAST, ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
 
-                    if (y > 0)
-                    {    
-                        res = Convert.ToInt32(cmd.ExecuteScalar());
+                    int x = cmd.ExecuteNonQuery();
+                    if (x > 0)
+                    {
+                        //Successful Update
+                        res = 1;
                     }
+
+
                 }
                 else
                 {
-                    res = -2;
+                    cmd.CommandText = "select count(*) as duplicate from user_account where UACC_EMAIL='" + ub.UACC_EMAIL + "';";
+                    int x = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (x <= 0)
+                    {
+                        cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5};",
+                       ub.UACC_FIRST, ub.UACC_MIDDLE, ub.UACC_LAST, ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
+
+                        int y = cmd.ExecuteNonQuery();
+                        if (y > 0)
+                        {
+                            //Successful Update
+                            res = 1;
+                        }
+                    }
+                    else
+                    {
+                        res = -2;
+                    }
                 }
+
                 con.Close();
-            
+
+
             }
             catch (Exception ex)
             {
-                Debug.Print("Register User Account Error : " + ex.Message);
+                Debug.Print("Update User Account Error : " + ex.Message);
             }
             return res;
         }
@@ -168,7 +188,7 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = query;
                 rdr = cmd.ExecuteReader();
-                if(rdr.Read() && !rdr.IsDBNull(0))
+                if (rdr.Read() && !rdr.IsDBNull(0))
                 {
                     ua.UACC_ID = rdr["UACC_ID"].ToString();
                     ua.UACC_FIRST = rdr["UACC_FIRST"].ToString();
@@ -183,7 +203,7 @@ namespace User.Database
                 rdr.Close();
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Login User Error : " + ex.Message);
             }
@@ -203,7 +223,7 @@ namespace User.Database
                 string query = string.Format(@"insert into blog_post(BLOG_CONTENT, BLOG_UACC_ID) values('{0}', {1});", content, id);
                 cmd.CommandText = query;
                 int x = cmd.ExecuteNonQuery();
-                if(x > 0)
+                if (x > 0)
                 {
                     //Success fully Inserted Post
                     //get Post ID for Logs
@@ -233,11 +253,11 @@ namespace User.Database
                 cmd.CommandText = string.Format("select BLOG_REPORT from blog_post where BLOG_ID={0};", blogid);
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
                 count++;
-                if(count >= 3)
+                if (count >= 3)
                 {
                     cmd.CommandText = string.Format("update blog_post set BLOG_REPORT=3, BLOG_REPORTER='{0}', BLOG_STATUS=false where BLOG_ID={1};", uid, blogid);
                     int x = cmd.ExecuteNonQuery();
-                    if(x > 0)
+                    if (x > 0)
                     {
                         res = true;
                     }
@@ -246,14 +266,14 @@ namespace User.Database
                 {
                     cmd.CommandText = string.Format("update blog_post set BLOG_REPORT={0}, BLOG_REPORTER='{1}' where BLOG_ID={2};", count, uid, blogid);
                     int x = cmd.ExecuteNonQuery();
-                    if(x > 0)
+                    if (x > 0)
                     {
                         res = true;
                     }
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Report Post : " + ex.Message);
             }
@@ -271,20 +291,19 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
-                if(chck <= 0)
+                if (chck <= 0)
                 {
                     //walay existing
-                    cmd.CommandText = string.Format("insert into blood_request(BREQ_JSON_SURVEY_FORM, BREQ_UACC_ID) " +
-                        "values('{0}', {1});", br.BREQ_JSON_SURVEY_FORM, br.BREQ_UACC_ID);
+                    cmd.CommandText = string.Format("insert into blood_request(BREQ_JSON_SURVEY_FORM, BREQ_UACC_ID) values('{0}', {1});", br.BREQ_JSON_SURVEY_FORM, br.BREQ_UACC_ID);
                     int x = cmd.ExecuteNonQuery();
-                    if(x > 0)
+                    if (x > 0)
                     {
                         res = true;
                     }
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Insert Blood request Error : " + ex.Message);
             }
@@ -312,7 +331,7 @@ namespace User.Database
                 da.Fill(dt);
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Get User Blood Requests : " + ex.Message);
             }
@@ -330,14 +349,14 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_REQ_STATUS=true;", id);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
-                if(chck > 0)
+                if (chck > 0)
                 {
                     res = true;
                     Debug.Print("Result : " + res);
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Check User Blood request Error : " + ex.Message);
             }
@@ -355,7 +374,7 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = string.Format("select * from blood_request where BREQ_ID={0};", id);
                 rdr = cmd.ExecuteReader();
-                if(rdr.Read() && !rdr.IsDBNull(0))
+                if (rdr.Read() && !rdr.IsDBNull(0))
                 {
                     br.BREQ_ID = rdr["BREQ_ID"].ToString();
                     br.BREQ_UACC_ID = rdr["BREQ_UACC_ID"].ToString();

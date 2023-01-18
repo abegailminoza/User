@@ -50,7 +50,7 @@ namespace User
             br.BREQ_JSON_SURVEY_FORM = JsonConvert.SerializeObject(rq);
             br.BREQ_UACC_ID = ua.UACC_ID;
 
-            if(db.InsertBloodrequest(br))
+            if (db.InsertBloodrequest(br))
             {
                 string query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('User ', UACC_FIRST, ' ', UACC_LAST, ' Submitted Blood Request'), {0}, '{1}' from user_account
@@ -62,7 +62,7 @@ namespace User
             }
             else
             {
-                Response.Write("<script>alert('An error was encountered while submitting your Survey Form.')</script>");
+                Response.Write("<script>alert('You have already made a request. Wait till the process is completed.')</script>");
 
             }
 
@@ -98,7 +98,7 @@ namespace User
             dateofbirth.Enabled = false;
             Age.Enabled = false;
             bloobredtyperequest.Enabled = false;
-            resaddress.Enabled = false;  
+            resaddress.Enabled = false;
             posaddress.Enabled = false;
             Home.Enabled = false;
             Mobile.Enabled = false;

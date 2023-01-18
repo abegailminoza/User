@@ -67,7 +67,7 @@ namespace User
                 if (isSuccess)
                 {
                     //Redirect To Login Page
-                    Server.Transfer("~/Default.aspx");
+                    Response.Redirect("~/Default.aspx");
                 }
             }
         }
