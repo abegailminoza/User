@@ -38,7 +38,10 @@ namespace User
                     Session["USER"] = ua;
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('User ', UACC_FIRST, ' ', UACC_LAST, ' Login'), {0}, '{1}' from user_account
-                                            where UACC_ID={2};", ua.UACC_ID, ua.UACC_FIRST + " " + ua.UACC_LAST, ua.UACC_ID);
+                                            where UACC_ID={2};", ua.UACC_ID, "User" , ua.UACC_ID);
+
+  
+
                     bool logs = db.InsertToUserLogs(query);
                     if(logs)
                     {

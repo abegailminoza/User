@@ -11,7 +11,7 @@ namespace User
 {
 
 
-    public partial class USER_PROFILE1
+    public partial class USER_LOGS
     {
 
         /// <summary>
@@ -42,66 +42,30 @@ namespace User
         protected global::System.Web.UI.HtmlControls.HtmlAnchor BtnLogout;
 
         /// <summary>
-        /// UPD_F control.
+        /// NoDataMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_F;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NoDataMsg;
 
         /// <summary>
-        /// UPD_M control.
+        /// TableContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_M;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TableContainer;
 
         /// <summary>
-        /// UPD_L control.
+        /// ActionLogs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_L;
-
-        /// <summary>
-        /// UPD_EMAIL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_EMAIL;
-
-        /// <summary>
-        /// UPD_PASS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_PASS;
-
-        /// <summary>
-        /// UPD_RPASS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UPD_RPASS;
-
-        /// <summary>
-        /// UpdateBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateBtn;
+        protected global::System.Web.UI.WebControls.GridView ActionLogs;
     }
 }

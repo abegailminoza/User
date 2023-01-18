@@ -172,5 +172,15 @@ namespace User
 
         }
 
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+
+            Session.Clear();
+            Session.RemoveAll();
+            Server.Transfer("~/Default.aspx");
+        }
+
+
     }
 }

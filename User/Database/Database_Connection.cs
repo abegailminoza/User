@@ -311,6 +311,27 @@ namespace User.Database
             return res;
         }
 
+        public DataTable GetUserLogsTableData()
+        {
+
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = "select * from activity_logs where ACT_UNAME='User' order by ACT_DATE desc;";
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Get Action Logs Error : " + ex.Message);
+            }
+            return dt;
+        }
+
         public bool ClickBloodrequest(blood_request br)
         {
             bool res = false;
@@ -319,7 +340,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and BREQ_REQ_STATUS=true", br.BREQ_UACC_ID);
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and BREQ_BLOOD_STATUS=false", br.BREQ_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {
@@ -457,7 +478,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BD_REQ_STATUS=true", br.BD_UACC_ID);
+                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BREQ_BLOOD_STATUS=false", br.BD_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {

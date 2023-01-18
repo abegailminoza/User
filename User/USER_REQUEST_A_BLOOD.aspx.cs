@@ -98,5 +98,14 @@ namespace User
                 Response.Redirect("~/USER_REQUEST_SURVEY_FORM.aspx");
             }
         }
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+
+            Session.Clear();
+            Session.RemoveAll();
+            Server.Transfer("~/Default.aspx");
+        }
+
     }
 }
