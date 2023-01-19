@@ -38,6 +38,7 @@
                     <li class="nav-item"><a class="nav-link" href="USER_CHAT.aspx"><i class="fa fa-envelope-o"></i><span>Inbox</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="USER_REQUEST_A_BLOOD.aspx"><i class="fa fa-tint"></i><span>Request a Blood</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="USER_BECOMEADONOR.aspx"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
+                    <li class="nav-item"><a class="nav-link " href="USER_LOGS.aspx"><i class="fa fa-list-ul"></i><span>Action Logs</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
@@ -118,15 +119,16 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span>
-                                        <img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="recentblog.html"><i class="fas fa-pen fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Manage Blog Post</a><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span><img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
+                                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
-                <a class="btn btn-primary" type="button" href="USER_DONOR_SURVEY_FORM.aspx" style="background: rgb(119,40,32); height: 46px; width: 204.406px; margin: 37px; padding: 12px 12px;">Become a Blood Donor</a>
+             <asp:Button runat="server" ID="BloodDonorBtn" OnClick="BloodDonor_Click" Class="btn btn-primary" UseSubmitBehavior="false" AutoPostBack="true" ValidationGroup="none" type="button" Style="background: rgb(119,40,32); height: 46px; width: 148.406px; margin: 37px; padding: 12px 12px;" Text="Become A Donor" />
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4" style="height: 31.5938px; margin: 32px;">Your blood request history</h3>
                     <div class="card shadow">

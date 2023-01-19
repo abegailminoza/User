@@ -51,6 +51,15 @@ namespace User
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Username;
 
         /// <summary>
+        /// BtnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor BtnLogout;
+
+        /// <summary>
         /// RequestBloodBtn control.
         /// </summary>
         /// <remarks>

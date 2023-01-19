@@ -34,7 +34,24 @@ namespace User
         protected void RequestBloodBtn_Click(object sender, EventArgs e)
         {
             Session["Input"] = true;
-            Response.Redirect("~/USER_REQUEST_SURVEY_FORM.aspx");
+
+            user_account ua = Session["USER"] as user_account;
+
+            blood_request br = new blood_request();
+           
+            br.BREQ_UACC_ID = ua.UACC_ID;
+
+            if (db.ClickBloodrequest(br))
+            {
+                //Successfullu Inseryted
+                Response.Redirect("~/USER_REQUEST_SURVEY_FORM.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('You have already made a request. Wait till the process is completed.')</script>");
+
+            }
+            
 
         }
 
@@ -83,7 +100,6 @@ namespace User
             }
         }
 
-
         private void GetUnreadNotif()
         {
             user_account ua = Session["USER"] as user_account;
@@ -131,6 +147,14 @@ namespace User
             }
         }
 
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+
+            Session.Clear();
+            Session.RemoveAll();
+            Server.Transfer("~/Default.aspx");
+        }
 
     }
 }

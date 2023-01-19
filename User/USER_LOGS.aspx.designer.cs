@@ -11,7 +11,7 @@ namespace User
 {
 
 
-    public partial class USER_BLOGPOST
+    public partial class USER_LOGS
     {
 
         /// <summary>
@@ -22,24 +22,6 @@ namespace User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm wrapper;
-
-        /// <summary>
-        /// UnreadCount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnreadCount;
-
-        /// <summary>
-        /// NotificationNavList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater NotificationNavList;
 
         /// <summary>
         /// Username control.
@@ -60,48 +42,30 @@ namespace User
         protected global::System.Web.UI.HtmlControls.HtmlAnchor BtnLogout;
 
         /// <summary>
-        /// BlogPosts control.
+        /// NoDataMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater BlogPosts;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NoDataMsg;
 
         /// <summary>
-        /// CompostBlogPost control.
+        /// TableContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CompostBlogPost;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TableContainer;
 
         /// <summary>
-        /// BlogPostMessage control.
+        /// ActionLogs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BlogPostMessage;
-
-        /// <summary>
-        /// PostBlog control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PostBlog;
-
-        /// <summary>
-        /// SendPrivateMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SendPrivateMessage;
+        protected global::System.Web.UI.WebControls.GridView ActionLogs;
     }
 }

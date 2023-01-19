@@ -100,6 +100,37 @@ namespace User
             }
         }
 
+        protected void BloodDonor_Click(object sender, EventArgs e)
+        {
+            Session["Input"] = true;
+
+            user_account ua = Session["USER"] as user_account;
+
+            blood_donation br = new blood_donation();
+
+            br.BD_UACC_ID = ua.UACC_ID;
+
+            if (db.ClickDonationrequest(br))
+            {
+                //Successfullu Inseryted
+                Response.Redirect("~/USER_DONOR_SURVEY_FORM.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('You have already made a request. Wait till the process is completed.')</script>");
+
+            }
+
+        }
+
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+
+            Session.Clear();
+            Session.RemoveAll();
+            Server.Transfer("~/Default.aspx");
+        }
 
     }
 }
