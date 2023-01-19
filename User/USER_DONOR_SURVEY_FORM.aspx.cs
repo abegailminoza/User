@@ -172,7 +172,7 @@ namespace User
                     NotificationNavList.DataBind();
                 }
             }
-
+        }
 
         protected void BtnLogout_ServerClick(object sender, EventArgs e)
         {
