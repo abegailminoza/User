@@ -1,11 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_BECOMEADONOR.aspx.cs" Inherits="User.USER_BECOMEADONOR" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_NOTIFICATION.aspx.cs" Inherits="User.USER_NOTIFICATION" %>
 
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Become A Donor</title>
+    <title>Blog Posts</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -34,11 +35,11 @@
                 </a>
                 <hr class="sidebar-divider my-0" />
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="USER_CHAT.aspx"><i class="fa fa-envelope-o"></i><span>Inbox</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="USER_REQUEST_A_BLOOD.aspx"><i class="fa fa-tint"></i><span>Request a Blood</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="USER_BECOMEADONOR.aspx"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
-                    
+                    <li class="nav-item"><a class="nav-link" href="USER_BECOMEADONOR.aspx"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
+                    <li class="nav-item"><a class="nav-link " href="USER_LOGS.aspx"><i class="fa fa-list-ul"></i><span>Action Logs</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
@@ -47,21 +48,18 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <div class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"></div>
-                        </div>
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-plus"></i></button>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <div class="me-auto navbar-search w-100">
+                                    <form class="me-auto navbar-search w-100">
                                         <div class="input-group">
                                             <input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -92,15 +90,15 @@
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">alerts center</h6>
+                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">MESSAGES</h6>
                                         <a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image me-3">
                                                 <img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
                                                 <div class="bg-success status-indicator"></div>
                                             </div>
                                             <div class="fw-bold">
-                                                <div class="text-truncate"><span>&nbsp;Hello</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                                                <div class="text-truncate"><span>Hello</span></div>
+                                                <p class="small text-gray-500 mb-0">Deya Vearl - 3m</p>
                                             </div>
                                         </a><a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image me-3">
@@ -109,9 +107,10 @@
                                             </div>
                                             <div class="fw-bold">
                                                 <div class="text-truncate"><span>Hi</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                                <p class="small text-gray-500 mb-0">Abegail Minoza - 14m</p>
                                             </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="chat.html">Show All Message</a>
+                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Messages</a>
+                                        <div class="dropdown-divider"></div>
                                     </div>
                                 </div>
                                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
@@ -128,28 +127,44 @@
                         </ul>
                     </div>
                 </nav>
-             <asp:Button runat="server" ID="BloodDonorBtn" OnClick="BloodDonor_Click" Class="btn btn-primary" UseSubmitBehavior="false" AutoPostBack="true" ValidationGroup="none" type="button" Style="background: rgb(119,40,32); height: 46px; width: 148.406px; margin: 37px; padding: 12px 12px;" Text="Become A Donor" />
+                <h1 style="padding-left: 50px;">Posts</h1>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4" style="height: 31.5938px; margin: 32px;">Your blood request history</h3>
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold"></p>
+                    <div class="row" style="margin-left: -116px;padding-left: 118px;">
+                        <div class="col-md-12 col-xxl-5 search-table-col"><span class="counter pull-right"></span>
+                            <div class="table-responsive table table-hover table-bordered results">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="bill-header cs">
+                                        <tr>
+                                            <th id="trs-hd-2" class="col-lg-2" style="width: 124.7188px;">Id</th>
+                                            <th id="trs-hd-3" class="col-lg-3" style="width: 169.078px;">Subject</th>
+                                            <th id="trs-hd-4" class="col-lg-2" style="width: 131.7188px;">Date</th>
+                                            <th id="trs-hd-6" class="col-lg-2" style="width: 119.7188px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="warning no-result">
+                                            <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                                        </tr>
+                                        <tr>
+                                            <td>01</td>
+                                            <td>India</td>
+                                            <td>Souvik Kundu</td>
+                                            <td>2014</td>
+                                            <td><button class="btn btn-success" style="margin-left: 5px;background: rgb(119,40,32);" type="submit"><i class="far fa-paper-plane" style="font-size: 15px;border-color: rgb(244,237,237);color: rgb(247,241,241);"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="max-height: 410px; overflow: auto;">
-                                <asp:GridView runat="server" ID="GridUserBloodDonation" Visible="true" AutoGenerateColumns="false" Width="100%"
-                                    BorderColor="Transparent" OnSelectedIndexChanged="GridUserBloodDonation_SelectedIndexChanged"
-                                    AutoPostBack="false"
-                                    AllowSorting="true">
-                                    <Columns>
-                                        <asp:BoundField HeaderText="ID" DataField="BD_ID" />
-                                        <asp:BoundField HeaderText="DONATOR" DataField="BD_UACC_ID" />
-                                        <asp:BoundField HeaderText="SURVEY STATUS" DataField="BD_SURVEY_STATUS" />
-                                        <asp:BoundField HeaderText="BLOOD STATUS" DataField="BD_BLOOD_STATUS" />
-                                        <asp:BoundField HeaderText="DATE" DataField="BD_DATE" />
-                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
-                                    </Columns>
-                                </asp:GridView>
+                        <div class="col-md-6 col-xxl-5">
+                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 300px;margin-bottom: 20px;height: 443px;">
+                                <div class="card-body d-flex flex-column" style="height: 434px;width: 98%;">
+                                    <div>
+                                        <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">Notification</h4>
+                                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Subject</h6>
+                                    </div><input type="text">
+                                    <p>Message</p><textarea style="height: 256px;width: 251px;"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +176,7 @@
                 </div>
             </footer>
         </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
