@@ -43,6 +43,18 @@ namespace User.Database
     }
 
     [Serializable]
+    public class notifications
+    {
+        public string NTF_ID { get; set; }
+        public string NTF_SUBJECT { get; set; }
+        public string NTF_MESSAGE { get; set; }
+        public string NTF_RECEIVER_ID { get; set; }
+        public string NTF_SENDER_ID { get; set; }
+        public bool NTF_STATUS { get; set; }
+        public string NTF_DATE { get; set; }
+    }
+
+    [Serializable]
     public class blood_request
     {
         public string BREQ_ID { get; set; }
