@@ -606,5 +606,29 @@ namespace User.Database
             return res;
         }
 
+        //Insert into Notification Table
+        public bool InsertToNotification(string query)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = query;
+                int x = cmd.ExecuteNonQuery();
+                if (x > 0)
+                {
+                    res = true;
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Insert To Notification Error : " + ex.Message);
+            }
+            return res;
+        }
+
     }
 }

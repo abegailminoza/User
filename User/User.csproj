@@ -261,6 +261,7 @@
     <Content Include="USER_DONOR_SURVEY_FORM_VIEW.aspx" />
     <Content Include="USER_LOGS.aspx" />
     <Content Include="USER_MANAGEBLOG.aspx" />
+    <Content Include="USER_NOTIFICATION.aspx" />
     <Content Include="USER_PROFILE.aspx" />
     <Content Include="USER_REGISTER.aspx" />
     <Content Include="USER_REQUEST_A_BLOOD.aspx" />
@@ -355,6 +356,13 @@
     </Compile>
     <Compile Include="USER_MANAGEBLOG.aspx.designer.cs">
       <DependentUpon>USER_MANAGEBLOG.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="USER_NOTIFICATION.aspx.cs">
+      <DependentUpon>USER_NOTIFICATION.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="USER_NOTIFICATION.aspx.designer.cs">
+      <DependentUpon>USER_NOTIFICATION.aspx</DependentUpon>
     </Compile>
     <Compile Include="USER_PROFILE.aspx.cs">
       <DependentUpon>USER_PROFILE.aspx</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,6 +59,17 @@ namespace User
                                             select concat('User ', UACC_FIRST, ' ', UACC_LAST, ' Submitted Blood Request'), {0}, '{1}' from user_account
                                             where UACC_ID={2};", ua.UACC_ID, "User", ua.UACC_ID);
                 bool logs = db.InsertToUserLogs(query);
+
+                //Send Notification
+                string sbj = string.Format("User {0} submitted a Blood Request", ua.UACC_ID);
+                string msg = MySqlHelper.EscapeString(string.Format(@"User {0} ( {1} {2} ) Submitted Blood Request.", ua.UACC_ID, ua.UACC_FIRST, ua.UACC_LAST));
+                query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
+                                                values('{0}', '{1}', 1, {2})", sbj, msg, ua.UACC_ID);
+                if (!db.InsertToNotification(query))
+                {
+                    Debug.Print("Notification was not sent.");
+                }
+
                 //Successfullu Inserted
                 Response.Write("<script>alert('Successfully Submitted Blood Request Form and is Pending for approval.')</script>");
                 Server.Transfer("~/USER_REQUEST_A_BLOOD.aspx");

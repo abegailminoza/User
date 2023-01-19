@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_REQUEST_SURVEY_FORM.aspx.cs" Inherits="User.USER_REQUEST_SURVEY_FORM" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="USER_NOTIFICATION.aspx.cs" Inherits="User.USER_NOTIFICATION" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Request Survey Form</title>
+    <title>Blog Posts</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -52,14 +52,14 @@
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <div class="me-auto navbar-search w-100">
+                                    <form class="me-auto navbar-search w-100">
                                         <div class="input-group">
-                                            <input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..." />
+                                            <input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -127,87 +127,45 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="container-fluid d-flex" style="justify-content: center; align-items: center;">
-                    <div class="card text-center" style="max-height: 500px; height: 500px; width: 80%;">
-                        <div class="card-header">
-                            <h2>BLOOD REQUEST</h2>
-                            <h3>FORM</h3>
-                        </div>
-                        <div class="card-body">
-                            <div style="max-height: 300px; overflow: auto;">
-                                <p style="font-size: 25px; font-style: bold; margin-left: -30%">
-                                    Please complete this form
-                                </p>
-                                <table style="text-align: left; width: 50%; margin: auto">
-                                    <tr>
-                                        <td>Family name:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="familyname" name="familyname" required="" /></td>
-                                        <td>First name:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="firstname" name="firstname" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Middle name:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="middlename" name="midname" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Date of birth:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="date" ID="dateofbirth" name="dateofbirth" required="" /></td>
-                                        <td>Gender:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="gender" name="gender" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Age:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="Age" name="occupation" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Blood Type Request:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="bloobredtyperequest" name="occupation" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Residential Address:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="resaddress" name="resaddress" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Postal Address:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="posaddress" name="posaddress" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <br />
-                                            Telephone No.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Home:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="Home" name="home" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mobile:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="Mobile" name="mobile" required="" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email Address:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="Email" name="email" required="" /></td>
-                                    </tr>
+                <h1 style="padding-left: 50px;">Posts</h1>
+                <div class="container-fluid">
+                    <div class="row" style="margin-left: -116px;padding-left: 118px;">
+                        <div class="col-md-12 col-xxl-5 search-table-col"><span class="counter pull-right"></span>
+                            <div class="table-responsive table table-hover table-bordered results">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="bill-header cs">
+                                        <tr>
+                                            <th id="trs-hd-2" class="col-lg-2" style="width: 124.7188px;">Id</th>
+                                            <th id="trs-hd-3" class="col-lg-3" style="width: 169.078px;">Subject</th>
+                                            <th id="trs-hd-4" class="col-lg-2" style="width: 131.7188px;">Date</th>
+                                            <th id="trs-hd-6" class="col-lg-2" style="width: 119.7188px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="warning no-result">
+                                            <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                                        </tr>
+                                        <tr>
+                                            <td>01</td>
+                                            <td>India</td>
+                                            <td>Souvik Kundu</td>
+                                            <td>2014</td>
+                                            <td><button class="btn btn-success" style="margin-left: 5px;background: rgb(119,40,32);" type="submit"><i class="far fa-paper-plane" style="font-size: 15px;border-color: rgb(244,237,237);color: rgb(247,241,241);"></i></button></td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="card-footer text-muted">
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true" />
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
-                            <br />
-                            <p style="font-style: italic">Disclaimer: Before clicking Submit make sure the form is completely filled up.</p>
+                        <div class="col-md-6 col-xxl-5">
+                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 300px;margin-bottom: 20px;height: 443px;">
+                                <div class="card-body d-flex flex-column" style="height: 434px;width: 98%;">
+                                    <div>
+                                        <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">Notification</h4>
+                                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Subject</h6>
+                                    </div><input type="text">
+                                    <p>Message</p><textarea style="height: 256px;width: 251px;"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -224,3 +182,5 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
+
+</html>

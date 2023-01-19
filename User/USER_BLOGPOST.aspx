@@ -70,7 +70,7 @@
                                             <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
                                                 <asp:Repeater runat="server" ID="NotificationNavList">
                                                     <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        <a class="dropdown-item d-flex align-items-center" href="USER_Notification.aspx">
                                                             <div class="me-3">
                                                                 <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
                                                             </div>
@@ -82,7 +82,7 @@
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </div>
-                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="USER_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
