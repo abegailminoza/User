@@ -175,33 +175,49 @@ namespace User
             }
             Debug.Print("Unread Count : " + count);
 
-            query = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS, NTF_DATE desc", ua.UACC_ID);
-            List<notifications> nList = db.GetNotifications(query);
-            if (nList != null && nList[0].NTF_ID != null)
+            if(count > 0)
             {
-                List<notifications> unread = nList.Where(x => x.NTF_STATUS == false).Select(g => g).ToList();
-                if(unread != null)
+                query = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS, NTF_DATE desc", ua.UACC_ID);
+                List<notifications> nList = db.GetNotifications(query);
+                try
                 {
-                    int rows = 0;
-                    if(count > 5)
+                    if (nList != null)
                     {
-                        rows = 5;
-                    }
-                    else
-                    {
-                        rows = unread.Count;
-                    }
-                    List<notifications> newUnread = new List<notifications>();
-                    for(int i = 0; i < rows; i++)
-                    {
-                        newUnread.Add(unread[i]);
-                    }
+                        if (nList[0].NTF_ID != null)
+                        {
+                            List<notifications> unread = nList.Where(x => x.NTF_STATUS == false).Select(g => g).ToList();
+                            if (unread != null)
+                            {
+                                int rows = 0;
+                                if (count > 5)
+                                {
+                                    rows = 5;
+                                }
+                                else
+                                {
+                                    rows = unread.Count;
+                                }
+                                List<notifications> newUnread = new List<notifications>();
+                                for (int i = 0; i < rows; i++)
+                                {
+                                    newUnread.Add(unread[i]);
+                                }
 
-                    NotificationNavList.DataSource = null;
-                    NotificationNavList.DataSource = newUnread;
-                    NotificationNavList.DataBind();
+                                NotificationNavList.DataSource = null;
+                                NotificationNavList.DataSource = newUnread;
+                                NotificationNavList.DataBind();
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print("No Notification : " + ex.Message);
                 }
             }
+
+            
         }
     }
 }
