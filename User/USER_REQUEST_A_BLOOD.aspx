@@ -66,18 +66,25 @@
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">alerts center</h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
+                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                                <asp:Repeater runat="server" ID="NotificationNavList">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                            <div class="me-3">
+                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                            </div>
+                                                            <div>
+                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                                <p><%# Eval("NTF_SUBJECT") %></p>
+                                                            </div>
+                                                            </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
                                             </div>
-                                            <div>
-                                                <span class="small text-gray-500">December 12, 2019</span>
-                                                <p>Your blood donation request has been approved!</p>
-                                            </div>
-                                        </a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
@@ -112,11 +119,10 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow">
-                                   <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span><img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
+                                <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span><img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
                                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                         <a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
-                                
                                 </div>
                             </li>
                         </ul>
@@ -133,7 +139,7 @@
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info" style="max-height: 410px; overflow: auto;">
                                 <asp:GridView runat="server" ID="GridUserBloodRequest" Visible="true" AutoGenerateColumns="false" Width="100%"
                                     BorderColor="Transparent" OnSelectedIndexChanged="GridUserBloodRequest_SelectedIndexChanged"
-                                    AutoPostBack="false" 
+                                    AutoPostBack="false"
                                     AllowSorting="true">
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="BREQ_ID" />

@@ -27,6 +27,7 @@ namespace User
                 Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
                 CheckUserBloodRequestsHistory();
                 PopulateRequestBloodGrid();
+                GetUnreadNotif();
             }
         }
 
@@ -98,6 +99,54 @@ namespace User
                 Response.Redirect("~/USER_REQUEST_SURVEY_FORM.aspx");
             }
         }
+
+        private void GetUnreadNotif()
+        {
+            user_account ua = Session["USER"] as user_account;
+
+            //Get Unread COunt
+            string query = string.Format(@"select count(*) from notifications where NTF_RECEIVER_ID={0} and NTF_STATUS=false;", ua.UACC_ID);
+            int count = db.GetUnreadNotificationCount(query);
+
+            if (count <= 9)
+            {
+                UnreadCount.InnerText = count.ToString();
+            }
+            else
+            {
+                UnreadCount.InnerText = "9+";
+            }
+            Debug.Print("Unread Count : " + count);
+
+            query = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS, NTF_DATE desc", ua.UACC_ID);
+            List<notifications> nList = db.GetNotifications(query);
+            if (nList != null && nList[0].NTF_ID != null)
+            {
+                List<notifications> unread = nList.Where(x => x.NTF_STATUS == false).Select(g => g).ToList();
+                if (unread != null)
+                {
+                    int rows = 0;
+                    if (count > 5)
+                    {
+                        rows = 5;
+                    }
+                    else
+                    {
+                        rows = unread.Count;
+                    }
+                    List<notifications> newUnread = new List<notifications>();
+                    for (int i = 0; i < rows; i++)
+                    {
+                        newUnread.Add(unread[i]);
+                    }
+
+                    NotificationNavList.DataSource = null;
+                    NotificationNavList.DataSource = newUnread;
+                    NotificationNavList.DataBind();
+                }
+            }
+        }
+
 
         protected void BtnLogout_ServerClick(object sender, EventArgs e)
         {

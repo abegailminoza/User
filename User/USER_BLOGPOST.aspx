@@ -64,18 +64,25 @@
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                                <asp:Repeater runat="server" ID="NotificationNavList">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                            <div class="me-3">
+                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                            </div>
+                                                            <div>
+                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                                <p><%# Eval("NTF_SUBJECT") %></p>
+                                                            </div>
+                                                            </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
                                             </div>
-                                            <div>
-                                                <span class="small text-gray-500">January 12, 2013</span>
-                                                <p>Your Blood Request has been approved!</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
@@ -115,8 +122,6 @@
                                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                         <a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
-                                    
-                                    
                                 </div>
                             </li>
                         </ul>
@@ -153,9 +158,9 @@
                                             <div class="card-footer">
                                                 <div class="row" style="padding-right: 30px; padding-left: 30px;">
                                                     <div class="col-1 d-flex justify-content-xxl-start align-items-xxl-center" style="width: fit-content;">
-                                                        <asp:LinkButton runat="server" ID="ReportBtn" ForeColor="#606060" 
+                                                        <asp:LinkButton runat="server" ID="ReportBtn" ForeColor="#606060"
                                                             CommandName="ReportPost" CommandArgument='<%# Eval("BLOG_ID") %>'
-                                                            UseSubmitBehavior="false" >
+                                                            UseSubmitBehavior="false">
                                                             <asp:Image runat="server" ImageUrl="~/assets/img/dislike.png" style="width: min(8vw, 20px); height: fit-content; margin-right: 5vw;" />
                                                         </asp:LinkButton>
                                                     </div>
@@ -177,12 +182,12 @@
                                         <h1 style="font-size: 30px;">Compost Post</h1>
                                     </div>
                                     <div class="card-body">
-                                        <asp:TextBox runat="server" ID="BlogPostMessage" Class="form-control-lg" required="" name="Content" placeholder="Your Message..." spellcheck="true" style="width: 100%; height: 100%; resize: none; border: none;" TextMode="MultiLine" />
+                                        <asp:TextBox runat="server" ID="BlogPostMessage" Class="form-control-lg" required="" name="Content" placeholder="Your Message..." spellcheck="true" Style="width: 100%; height: 100%; resize: none; border: none;" TextMode="MultiLine" />
                                     </div>
                                     <div class="card-footer">
                                         <div class="row" style="padding-right: 30px; padding-left: 30px;">
                                             <div class="col d-flex justify-content-xxl-end align-items-xxl-center">
-                                                <asp:Button runat="server" ID="PostBlog" Text="POST" OnClick="PostBlog_Click" AutoPostBack="true" UseSubmitBehavior="false" ValidationGroup="none"  Class="btn btn-primary" type="button" style="background: rgb(119,40,32);" />
+                                                <asp:Button runat="server" ID="PostBlog" Text="POST" OnClick="PostBlog_Click" AutoPostBack="true" UseSubmitBehavior="false" ValidationGroup="none" Class="btn btn-primary" type="button" Style="background: rgb(119,40,32);" />
                                             </div>
                                         </div>
                                     </div>
