@@ -63,18 +63,25 @@
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                                <asp:Repeater runat="server" ID="NotificationNavList">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                            <div class="me-3">
+                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                            </div>
+                                                            <div>
+                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                                <p><%# Eval("NTF_SUBJECT") %></p>
+                                                            </div>
+                                                            </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
                                             </div>
-                                            <div>
-                                                <span class="small text-gray-500">January 12, 2013</span>
-                                                <p>Your Blood Request has been approved!</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
@@ -110,7 +117,8 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span><img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" runat="server" id="Username"></span>
+                                        <img class="border rounded-circle img-profile" src="assets/img/avatars/icons8-user-60.png" /></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="USER_PROFILE.aspx"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="recentblog.html"><i class="fas fa-pen fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Manage Blog Post</a><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
                                 </div>
                             </li>
@@ -135,65 +143,67 @@
                                             <asp:TextBox runat="server" type="text" ID="familyname" name="familyname" required="" /></td>
                                         <td>First name:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="firstname" name="firstname" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="firstname" name="firstname" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Middle name:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="middlename" name="midname" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="middlename" name="midname" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Date of birth:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="date" ID="dateofbirth" name="dateofbirth" required="" /></td>
+                                            <asp:TextBox runat="server" type="date" ID="dateofbirth" name="dateofbirth" required="" /></td>
                                         <td>Gender:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="gender" name="gender" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="gender" name="gender" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Age:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="Age" name="occupation" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="Age" name="occupation" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Blood Type Request:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="bloobredtyperequest" name="occupation" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="bloobredtyperequest" name="occupation" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Residential Address:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="resaddress" name="resaddress" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="resaddress" name="resaddress" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Postal Address:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="posaddress" name="posaddress" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="posaddress" name="posaddress" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td><br />Telephone No.</td>
+                                        <td>
+                                            <br />
+                                            Telephone No.</td>
                                     </tr>
                                     <tr>
                                         <td>Home:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="Home" name="home" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="Home" name="home" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Mobile:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="Mobile" name="mobile" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="Mobile" name="mobile" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <asp:TextBox runat="server"  type="text" ID="Email" name="email" required="" /></td>
+                                            <asp:TextBox runat="server" type="text" ID="Email" name="email" required="" /></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true"/>
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true"/>
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" ID="SubmitSurvey" OnClick="SubmitSurvey_Click" Text="Submit Survey" type="submit" UseSubmitBehavior="true" AutoPostBack="true" />
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" Visible="false" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
                             <br />
                             <p style="font-style: italic">Disclaimer: Before clicking Submit make sure the form is completely filled up.</p>
                         </div>

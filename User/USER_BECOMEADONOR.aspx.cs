@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,7 +18,10 @@ namespace User
         {
             if(!Page.IsPostBack)
             {
+                user_account ua = Session["USER"] as user_account;
+                Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
                 PopulateDonationBloodGrid();
+                GetUnreadNotif();
             }
         }
 
@@ -48,5 +52,54 @@ namespace User
                 Response.Redirect("~/USER_DONOR_SURVEY_FORM_VIEW.aspx");
             }
         }
+
+        private void GetUnreadNotif()
+        {
+            user_account ua = Session["USER"] as user_account;
+
+            //Get Unread COunt
+            string query = string.Format(@"select count(*) from notifications where NTF_RECEIVER_ID={0} and NTF_STATUS=false;", ua.UACC_ID);
+            int count = db.GetUnreadNotificationCount(query);
+
+            if (count <= 9)
+            {
+                UnreadCount.InnerText = count.ToString();
+            }
+            else
+            {
+                UnreadCount.InnerText = "9+";
+            }
+            Debug.Print("Unread Count : " + count);
+
+            query = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS, NTF_DATE desc", ua.UACC_ID);
+            List<notifications> nList = db.GetNotifications(query);
+            if (nList != null && nList[0].NTF_ID != null)
+            {
+                List<notifications> unread = nList.Where(x => x.NTF_STATUS == false).Select(g => g).ToList();
+                if (unread != null)
+                {
+                    int rows = 0;
+                    if (count > 5)
+                    {
+                        rows = 5;
+                    }
+                    else
+                    {
+                        rows = unread.Count;
+                    }
+                    List<notifications> newUnread = new List<notifications>();
+                    for (int i = 0; i < rows; i++)
+                    {
+                        newUnread.Add(unread[i]);
+                    }
+
+                    NotificationNavList.DataSource = null;
+                    NotificationNavList.DataSource = newUnread;
+                    NotificationNavList.DataBind();
+                }
+            }
+        }
+
+
     }
 }
