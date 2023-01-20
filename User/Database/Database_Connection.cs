@@ -630,5 +630,27 @@ namespace User.Database
             return res;
         }
 
+        public DataTable GetNotificationTableData(user_account ua)
+        {
+
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format("select * from notifications where NTF_RECEIVER_ID={0} order by NTF_DATE desc;", ua.UACC_ID);
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Get Action Logs Error : " + ex.Message);
+            }
+            return dt;
+        }
+
+
     }
 }

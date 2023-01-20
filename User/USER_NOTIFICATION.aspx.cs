@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +15,8 @@ namespace User
 {
     public partial class USER_NOTIFICATION : System.Web.UI.Page
     {
+       
+
         private Database_Connection db = new Database_Connection();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,9 +30,30 @@ namespace User
                 user_account ua = Session["USER"] as user_account;
                 Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
                 GetUnreadNotif();
+                PopulateNotificationGridView();
             }
         }
+        public void PopulateNotificationGridView()
+        {
+            user_account ua = Session["USER"] as user_account;
 
+
+            DataTable data = db.GetNotificationTableData(ua);
+
+            if (data != null)
+            {
+                NoDataMsg.Attributes.Add("display", "none");
+                TableContainer.Attributes.Add("display", "");
+                NotificationGrid.DataSource = null;
+                NotificationGrid.DataSource = data;
+                NotificationGrid.DataBind();
+            }
+            else
+            {
+                NoDataMsg.Attributes.Add("display", "");
+                TableContainer.Attributes.Add("display", "none");
+            }
+        }
 
         protected void BtnLogout_ServerClick(object sender, EventArgs e)
         {
