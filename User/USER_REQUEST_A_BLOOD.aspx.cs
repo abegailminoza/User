@@ -31,6 +31,16 @@ namespace User
             }
         }
 
+        protected void NotificationNavList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewNotif")
+            {
+                string id = e.CommandArgument.ToString();
+                Session["IsViewing"] = true;
+                Session["NTF_ID"] = id;
+                Response.Redirect("~/USER_NOTIFICATION.aspx");
+            }
+        }
         protected void RequestBloodBtn_Click(object sender, EventArgs e)
         {
             Session["Input"] = true;

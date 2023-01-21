@@ -45,7 +45,7 @@ namespace User
                     bool logs = db.InsertToUserLogs(query);
                     if(logs)
                     {
-                        Server.Transfer("~/USER_BLOGPOST.aspx");
+                        Response.Redirect("~/USER_BLOGPOST.aspx");
                     }
                 }
                 else
