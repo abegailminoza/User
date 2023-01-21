@@ -102,7 +102,6 @@ namespace User
             ds.riskAssessment.N211 = Request.Form["rd211"].ToString();
 
             Session["Surver"] = JsonConvert.SerializeObject(ds);
-            Response.Write(JsonConvert.SerializeObject(ds));
 
             user_account ua = Session["USER"] as user_account;
             blood_donation bd = new blood_donation();
