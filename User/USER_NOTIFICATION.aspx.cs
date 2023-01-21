@@ -25,12 +25,33 @@ namespace User
                 Response.Redirect("~/Default.aspx");
             }
 
+            
+
             if (!Page.IsPostBack)
             {
                 user_account ua = Session["USER"] as user_account;
                 Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
                 GetUnreadNotif();
-                PopulateNotificationGridView();
+                if (Convert.ToBoolean(Session["IsViewing"]))
+                {
+                    ViewNotifWithID(Session["NTF_ID"].ToString());
+                }
+                else
+                {
+
+                    PopulateNotificationGridView();
+                }
+            }
+        }
+
+        protected void NotificationNavList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewNotif")
+            {
+                string id = e.CommandArgument.ToString();
+                Session["IsViewing"] = true;
+                Session["NTF_ID"] = id;
+                Response.Redirect("~/USER_NOTIFICATION.aspx");
             }
         }
         public void PopulateNotificationGridView()
@@ -39,7 +60,7 @@ namespace User
 
 
             DataTable data = db.GetNotificationTableData(ua);
-
+            Debug.Print(JsonConvert.SerializeObject(data));
             if (data != null)
             {
                 NoDataMsg.Attributes.Add("display", "none");
@@ -60,7 +81,7 @@ namespace User
 
             Session.Clear();
             Session.RemoveAll();
-            Server.Transfer("~/Default.aspx");
+            Response.Redirect("~/Default.aspx");
         }
 
         private void GetUnreadNotif()
@@ -119,6 +140,59 @@ namespace User
                 catch (Exception ex)
                 {
                     Debug.Print("No Notification : " + ex.Message);
+                }
+            }
+        }
+
+        protected void NotificationGrid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = NotificationGrid.SelectedRow;
+            string id = row.Cells[0].Text;
+            notifications ntf = db.SearchNotification(id);
+
+            if (ntf != null)
+            {
+                if (ntf.NTF_SENDER_ID != null)
+                {
+                    NotificationDetails.Style.Add("display", "");
+                    Subject.Text = ntf.NTF_SUBJECT;
+                    Message.InnerText = ntf.NTF_MESSAGE;
+
+                    //Update Status
+                    if (!ntf.NTF_STATUS)
+                    {
+                        if (db.UpdateNotificationStatus(id))
+                        {
+                            Debug.Print("Success");
+                        }
+                        PopulateNotificationGridView();
+                    }
+                }
+            }
+        }
+
+        public void ViewNotifWithID(string id)
+        {
+            notifications ntf = db.SearchNotification(id);
+
+            if (ntf != null)
+            {
+                if (ntf.NTF_SENDER_ID != null)
+                {
+                    NotificationDetails.Style.Add("display", "");
+                    Subject.Text = ntf.NTF_SUBJECT;
+                    Message.InnerText = ntf.NTF_MESSAGE;
+
+                    //Update Status
+                    if (!ntf.NTF_STATUS)
+                    {
+                        if (db.UpdateNotificationStatus(id))
+                        {
+                            Debug.Print("Success");
+                        }
+                        PopulateNotificationGridView();
+                        GetUnreadNotif();
+                    }
                 }
             }
         }
