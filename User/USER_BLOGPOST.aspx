@@ -147,8 +147,9 @@
                                                             <div class="col">
                                                                 <h1 class="fs-3"><%# Eval("BLOG_UACC_NAME") %></h1>
                                                             </div>
-                                                            <div class="col">
+                                                            <div class="col d-flex" style="flex-direction: column">
                                                                 <h3 class="text-lowercase fs-5"><%# Eval("BLOG_UACC_EMAIL") %></h3>
+                                                                <h5><%# Eval("BLOG_DATE") %></h5>
                                                             </div>
                                                         </div>
                                                     </div>

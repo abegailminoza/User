@@ -171,8 +171,8 @@
                 <div class="container-fluid d-flex" style="justify-content: center; align-items: center;">
                     <div class="card text-center" style="max-height: 500px; height: 500px; width: 80%;">
                         <div class="card-header">
-                            <h2>BLOOD TRANSFUSION SERVICE</h2>
-                            <h3>DONOR QUESTIONNAIRE</h3>
+                            <h2>BLOOD DONOR FORM</h2>
+                            <h3>QUESTIONNAIRE</h3>
                         </div>
                         <div class="card-body">
                             <div style="max-height: 300px; overflow: auto;">
