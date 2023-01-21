@@ -31,7 +31,6 @@ namespace User
             {
                 user_account ua = Session["USER"] as user_account;
                 Username.InnerText = ua.UACC_FIRST + " " + ua.UACC_LAST;
-                GetUnreadNotif();
                 if (Convert.ToBoolean(Session["IsViewing"]))
                 {
                     ViewNotifWithID(Session["NTF_ID"].ToString());
@@ -41,6 +40,8 @@ namespace User
 
                     PopulateNotificationGridView();
                 }
+
+                GetUnreadNotif();
             }
         }
 
