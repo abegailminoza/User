@@ -6,7 +6,7 @@
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Blog Posts</title>
+    <title>Notifications</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -129,19 +129,15 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="container-fluid">
+              <div class="container-fluid">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-7">
                             <div class="card shadow">
                                 <div class="card-header py-3">
-                                    <h1>Notifications</h1>
+                                    <p></p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="card-body">
+
+                                <div class="card-body">
                                 <h3 runat="server" id="NoDataMsg" style="display: none;">No Data</h3>
                                 <div runat="server" id="TableContainer" style="max-height: 450px">
                                     <div id="VerticalScroll" style="overflow: auto; max-height: inherit;">
@@ -153,25 +149,38 @@
                                                 <asp:BoundField HeaderText="SUBJECT" DataField="NTF_SUBJECT" />
                                                 <asp:BoundField HeaderText="DATE" DataField="NTF_DATE" />
                                                 <asp:BoundField HeaderText="STATUS" DataField="NTF_STATUS" />
-                                                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" />
+                                                <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn btn-danger" />
                                             </Columns>
                                         </asp:GridView>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4" style="display: none;" runat="server" id="NotificationDetails">
-                            <div class="card" style="width: 80rem; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25); margin: 28px; min-width: 280px; max-width: 500px; margin-bottom: 20px; height: 443px;">
-                                <div class="card-body d-flex flex-column" style="height: 600px; width: 98%;">
+                        <div class="col-4"  runat="server" id="NotificationDetails">
+                            <asp:Panel ID="NotifPanel" Visible="false" runat="server">
+                            <div class="card" style="width: 80rem; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25); margin: 28px; min-width: 280px; max-width: 550px; margin-bottom: 20px; height: 580px;">
+                                <div class="card-header">
+                                    <div class="row">
+                                     <div class="col-xl-8 d-flex justify-content-xxl-start align-items-xxl-center">
+                                    <h4 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 700; color: rgb(255,160,0);">Notification</h4>
+                                    </div>
+                                    <div class="col-1 col-xl-3 d-flex justify-content-xxl-center align-items-xxl-center" style="padding-right: 0px; padding-left: 55px;">
+                                      <asp:ImageButton runat="server" src="assets/img/close.png" width="25" height="25" style="margin-left: 28px;" OnClick="Close_Click1" />
+                                      </div>
+                                </div>
+                                </div>
+                                <div class="card-body d-flex flex-column" style="height: 580px; width: 98%;">
                                     <div>
-                                        <h4 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 700; color: rgb(255,160,0);">Notification</h4>
+                                        
                                         <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif; font-weight: 600; color: #757575;">Subject</h6>
                                     </div>
-                                    <asp:TextBox runat="server" Class="form-control" type="text" Enabled="false" ID="Subject"></asp:TextBox>
+                                    <asp:TextBox runat="server" Class="form-control" type="text" Enabled="false" ID="Subject" style="border:none;margin-bottom:15px;"></asp:TextBox>
                                     <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif; font-weight: 600; color: #757575;">Message</h6>
-                                    <textarea class="form-control" style="height: 100%;" runat="server" id="Message" readonly=""></textarea>
-                                </div>
+                                    <textarea class="form-control" style="height: 100%; color:black;" runat="server" id="Message" readonly=""></textarea>
+                               </div>
                             </div>
+                                </asp:Panel>
                         </div>
                     </div>
                 </div>

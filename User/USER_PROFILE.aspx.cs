@@ -172,6 +172,7 @@ namespace User
 
             Session.Clear();
             Session.RemoveAll();
+            Session["LOGIN"] = false;
             Response.Redirect("~/Default.aspx");
         }
 

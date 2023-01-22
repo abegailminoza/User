@@ -107,6 +107,31 @@ namespace User
 
 
             }
+
+            if (e.CommandName == "ReplyClick")
+            {
+
+                PostPanel.Visible = false;
+                MessagePanel.Visible = true;
+                
+
+                 DataTable dt = Session["BlogPosts"] as DataTable;
+                DataRow[] row = dt.Select("BLOG_ID='" + e.CommandArgument + "'");
+
+                string reporter;
+                int id;
+
+                if (row.Length > 0)
+                {
+                    reporter = row[0]["BLOG_UACC_EMAIL"].ToString();
+                    id = Convert.ToInt32(row[0]["BLOG_UACC_ID"]);
+                    ReceiverEmail.Text = reporter;
+                    ReceiverID.Text = id.ToString();
+                }
+
+                PopulatemMessage();
+
+            }
         }
 
         protected void PostBlog_Click(object sender, EventArgs e)
@@ -229,6 +254,60 @@ namespace User
                 Session["NTF_ID"] = id;
                 Response.Redirect("~/USER_NOTIFICATION.aspx");
             }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            
+            user_account ua = Session["USER"] as user_account;
+            user_account ub = new user_account();
+
+            string emailR = ReceiverID.Text;
+            int RecID = Convert.ToInt32(emailR);
+            ub.UACC_ID = ua.UACC_ID;
+            ub.UACC_FIRST = ua.UACC_FIRST;
+            string message = Mess.Text;
+
+            if (db.InsertUserMessage(ub,RecID,message))
+            {
+                //Successfullu Inseryted
+               
+                Mess.Text = "";
+                PopulatemMessage();
+
+            }
+            else
+            {
+                Response.Write("<script>alert("+RecID+"'.'"+ub.UACC_ID+"'.'"+message+")</script>");
+
+            }
+        }
+
+
+        public void PopulatemMessage()
+        {
+            string recid= ReceiverID.Text;
+            string emailR = ReceiverEmail.Text;
+            int RecID = Convert.ToInt32(recid);
+
+            user_account ua = Session["USER"] as user_account;
+            string emailS = ua.UACC_ID;
+            int SendID = Convert.ToInt32(emailS);
+
+            DataTable dt = db.MessageReapeater(RecID,SendID,emailR);
+            if (dt != null)
+            {
+                MessageReply.DataSource = null;
+                MessageReply.DataSource = dt;
+                MessageReply.DataBind();
+                Session["BlogPosts"] = dt;
+            }
+        }
+
+        protected void Close_Click1(object sender, ImageClickEventArgs e)
+        {
+            PostPanel.Visible = true;
+            MessagePanel.Visible = false;
         }
     }
 }

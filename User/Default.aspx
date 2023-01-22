@@ -49,9 +49,7 @@
                                 <asp:Button runat="server" Text="Login" ID="LoginBtn" OnClick="LoginBtn_Click" UseSubmitBehavior="true" AutoPostBack="true" Class="btn btn-primary d-block btn-user w-100" type="submit" style="background: rgb(119,40,32); width: 319.609px;" />
                                 <hr style="margin-top: 16px;" />
                                 <a href="USER_REGISTER.aspx" style="font-size: 10px; text-align: center;">Don't Have an Account? Register.</a>
-                                <a href="#" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Admin</a>
-                                <a href="BloodBank/BB_LOGIN.aspx" style="font-size: 10px; text-align: center; margin-top: 10px;">Login as Blood Bank</a>
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </div>

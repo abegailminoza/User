@@ -132,7 +132,7 @@
                 </nav>
                 <asp:Button runat="server" ID="BloodDonorBtn" OnClick="BloodDonor_Click" Class="btn btn-primary" UseSubmitBehavior="false" AutoPostBack="true" ValidationGroup="none" type="button" Style="background: rgb(119,40,32); height: 46px; width: 148.406px; margin: 37px; padding: 12px 12px;" Text="Become A Donor" />
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4" style="height: 31.5938px; margin: 32px;">Your blood request history</h3>
+                    <h3 class="text-dark mb-4" style="height: 31.5938px; margin: 32px;">Your request-donor history</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold"></p>
@@ -145,11 +145,11 @@
                                     AllowSorting="true">
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="BD_ID" />
-                                        <asp:BoundField HeaderText="DONATOR" DataField="BD_UACC_ID" />
-                                        <asp:BoundField HeaderText="SURVEY STATUS" DataField="BD_SURVEY_STATUS" />
-                                        <asp:BoundField HeaderText="BLOOD STATUS" DataField="BD_BLOOD_STATUS" />
+                                        <asp:BoundField HeaderText="DONOR" DataField="BD_UACC_ID" />
+                                        <asp:BoundField HeaderText="REQUEST STATUS" DataField="BD_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="DONATED" DataField="BD_BLOOD_STATUS" />
                                         <asp:BoundField HeaderText="DATE" DataField="BD_DATE" />
-                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
+                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

@@ -155,7 +155,7 @@ namespace User
             {
                 if (ntf.NTF_SENDER_ID != null)
                 {
-                    NotificationDetails.Style.Add("display", "");
+                    NotifPanel.Visible = true;
                     Subject.Text = ntf.NTF_SUBJECT;
                     Message.InnerText = ntf.NTF_MESSAGE;
 
@@ -180,7 +180,7 @@ namespace User
             {
                 if (ntf.NTF_SENDER_ID != null)
                 {
-                    NotificationDetails.Style.Add("display", "");
+                    NotifPanel.Visible = true;
                     Subject.Text = ntf.NTF_SUBJECT;
                     Message.InnerText = ntf.NTF_MESSAGE;
 
@@ -196,6 +196,11 @@ namespace User
                     }
                 }
             }
+        }
+
+        protected void Close_Click1(object sender, ImageClickEventArgs e)
+        {
+            NotifPanel.Visible = false;
         }
     }
 }

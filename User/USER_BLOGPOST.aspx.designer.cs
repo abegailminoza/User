@@ -78,6 +78,15 @@ namespace User
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl CompostBlogPost;
 
         /// <summary>
+        /// PostPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PostPanel;
+
+        /// <summary>
         /// BlogPostMessage control.
         /// </summary>
         /// <remarks>
@@ -96,12 +105,57 @@ namespace User
         protected global::System.Web.UI.WebControls.Button PostBlog;
 
         /// <summary>
-        /// SendPrivateMessage control.
+        /// MessagePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SendPrivateMessage;
+        protected global::System.Web.UI.WebControls.Panel MessagePanel;
+
+        /// <summary>
+        /// ReceiverEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ReceiverEmail;
+
+        /// <summary>
+        /// ReceiverID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ReceiverID;
+
+        /// <summary>
+        /// MessageReply control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater MessageReply;
+
+        /// <summary>
+        /// Mess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Mess;
+
+        /// <summary>
+        /// SendBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SendBtn;
     }
 }
