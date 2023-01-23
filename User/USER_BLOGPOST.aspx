@@ -132,7 +132,7 @@
                 <h1 style="padding-left: 50px;">Posts</h1>
                 <div class="container-fluid">
                     <div class="row" style="height: 100%;">
-                        <div class="col-7" style="padding-left: 40px; padding-right: 40px; overflow: auto; max-height: 500px;">
+                        <div class="col-7" style="padding-left: 40px; padding-right: 40px; overflow: auto; max-height: 650px;">
                             <asp:Repeater runat="server" ID="BlogPosts" OnItemCommand="BlogPosts_ItemCommand">
                                 <ItemTemplate>
                                     <div style="margin-bottom: 20px;">
@@ -145,17 +145,18 @@
                                                     <div class="col">
                                                         <div class="row d-flex flex-column">
                                                             <div class="col">
-                                                                <h1 class="fs-3"><%# Eval("BLOG_UACC_NAME") %></h1>
+                                                                <h3 class="fs-3"><%# Eval("BLOG_UACC_NAME") %></h3>
                                                             </div>
-                                                            <div class="col">
-                                                                <h3 class="text-lowercase fs-5"><%# Eval("BLOG_UACC_EMAIL") %></h3>
+                                                            <div class="col d-flex" style="flex-direction: column">
+                                                                <h4 class="text-lowercase fs-5"><%# Eval("BLOG_UACC_EMAIL") %></h4>
+                                                                <h5><%# Eval("BLOG_DATE") %></h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                <p class="card-text"><%# Eval("BLOG_CONTENT") %></p>
+                                                <h5 class="card-text"><%# Eval("BLOG_CONTENT") %></h5>
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row" style="padding-right: 30px; padding-left: 30px;">
@@ -168,7 +169,11 @@
                                                     </div>
                                                     <div class="col-2 d-flex align-items-xxl-center"><span style="font-weight: bold; color: rgb(119,40,32);"><%#Eval("BLOG_REPORT") %></span></div>
                                                     <div class="col d-flex justify-content-xxl-end align-items-xxl-center">
-                                                        <img class="img-fluid" src="assets/img/reply.png" width="20">
+                                                       <asp:LinkButton runat="server" ID="ReplyClickBtn" ForeColor="#606060"
+                                                            CommandName="ReplyClick" CommandArgument='<%# Eval("BLOG_ID") %>'
+                                                            UseSubmitBehavior="false">
+                                                            <asp:Image runat="server" ImageUrl="~/assets/img/reply.png" style="width: min(8vw, 20px); height: fit-content; margin-right: 5vw;" />
+                                                        </asp:LinkButton>
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,6 +184,7 @@
                         </div>
                         <div runat="server" class="col" style="padding-left: 50px; padding-right: 50px;" id="CompostBlogPost">
                             <div>
+                                <asp:Panel ID="PostPanel" runat="server">
                                 <div class="card" style="height: 300px;">
                                     <div class="card-header" style="padding-right: 30px; padding-left: 30px;">
                                         <h1 style="font-size: 30px;">Compost Post</h1>
@@ -194,30 +200,65 @@
                                         </div>
                                     </div>
                                 </div>
+                                </asp:Panel>
                             </div>
-                            <div runat="server" id="SendPrivateMessage" style="display: none;">
-                                <div class="card" style="height: 300px;">
-                                    <div class="card-header" style="padding-right: 30px; padding-left: 30px;">
+                            <div class="container-fluid" id="SendPrivateMessage" >
+                                <asp:Panel ID="MessagePanel" runat="server" Visible="false">
+                                <div class="card" style="height: 600px;">
+
+                                    <div class="card-header" style="padding-right: 30px; padding-left: 50px;">
                                         <div class="row">
                                             <div class="col-xl-8 d-flex justify-content-xxl-start align-items-xxl-center">
-                                                <h6 class="fs-4" style="font-size: 30px;">Compost Private Message</h6>
-                                            </div>
-                                            <div class="col-1 col-xl-3 d-flex justify-content-xxl-center align-items-xxl-center" style="padding-right: 0px; padding-left: 15px;">
-                                                <img src="assets/img/close.png" width="52" height="52" style="margin-left: 22px;">
-                                            </div>
+                                               <asp:Label runat="server" id="ReceiverEmail" style="font-size:25px;"></asp:Label>
+                                                <asp:Label runat="server" id="ReceiverID" Visible="false" style="font-size:25px;"></asp:Label>
+                                             </div>
+                                            <div class="col-1 col-xl-3 d-flex justify-content-xxl-center align-items-xxl-center" style="padding-right: 0px; padding-left: 115px;">
+                                                <asp:ImageButton runat="server" src="assets/img/close.png" width="45" height="45" style="margin-left: 28px;" OnClick="Close_Click1" />
                                         </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <input type="hidden" id="ReceiverID"><textarea class="form-control-lg" name="Content" placeholder="Your Message..." spellcheck="true" required="" style="width: 100%; height: 100%; resize: none; border: none;"></textarea>
-                                    </div>
+                                        </div>
+                                      </div>
+
+                                   <div class="card-body" style="overflow: auto;">
+                                    
+                                       <div class="row" >
+                                         <div class="col" >
+                                           <asp:Repeater runat="server" ID="MessageReply" >
+                                                <ItemTemplate>
+                                                    <div class="col" style="margin-bottom: 5px;">
+                                                        <div class="card">
+                                                            <div class="card-header" style="padding-right:10px; padding-left: 10px;">
+                                                               <h5 class="card-text"><%#  Eval("MESSAGE_NAME") %></h5>
+                                                                <h6 class="card-text"><%# Eval("MESSAGE_TIME_SENT") %></h6>
+                                                                
+                                                             </div>
+                                                             
+                                                   
+                                                            <div class="card-body">
+                                                                <h5 class="card-text"><%# Eval("MESSAGE_CONTENT") %></h5>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            </div>
+                                          </div>
+                                        
+                                         </div>
+
                                     <div class="card-footer">
                                         <div class="row" style="padding-right: 30px; padding-left: 30px;">
                                             <div class="col d-flex justify-content-xxl-end align-items-xxl-center">
-                                                <button class="btn btn-primary" type="button" style="background: rgb(119,40,32);">Send Private Message</button>
-                                            </div>
+                                                 <asp:TextBox runat="server" ID="Mess" Class="form-control"  TextMode="Multiline"></asp:TextBox>
+
+                                                 <asp:Button ID="SendBtn" runat="server" class="btn btn-danger" text="Send"  OnClick="Unnamed1_Click" AutoPostBack="true" stye="margin-left:5px;"></asp:Button>
+
+                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                     </asp:Panel>
                             </div>
                         </div>
                     </div>

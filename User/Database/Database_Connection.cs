@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -50,6 +51,7 @@ namespace User.Database
             }
             catch (Exception ex)
             {
+
                 Debug.Print("Sample Repeater Error : " + ex.Message);
             }
             return dt;
@@ -120,7 +122,7 @@ namespace User.Database
         }
 
         //Update User Account
-        public int UpdateUserAccount(user_account ub,string email)
+        public int UpdateUserAccount(user_account ub, string email)
         {
 
 
@@ -130,7 +132,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                if(email==ub.UACC_EMAIL)
+                if (email == ub.UACC_EMAIL)
                 {
                     cmd.CommandText = string.Format("UPDATE user_account SET UACC_FIRST = '{0}',UACC_MIDDLE = '{1}',UACC_LAST = '{2}',UACC_EMAIL = '{3}',UACC_PASSWORD = '{4}'  WHERE UACC_ID = {5};",
                        ub.UACC_FIRST, ub.UACC_MIDDLE, ub.UACC_LAST, ub.UACC_EMAIL, ub.UACC_PASSWORD, ub.UACC_ID);
@@ -344,9 +346,9 @@ namespace User.Database
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {
-                   
-                        res = true;
-                    
+
+                    res = true;
+
                 }
                 con.Close();
             }
@@ -370,9 +372,9 @@ namespace User.Database
                                                     if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
                                                     if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
                                                     if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
-                                                    if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
-                                                    if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
-                                                    if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_BLOOD_STATUS
+                                                    if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, '--', 
+                                                    if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'YES', 
+                                                    if(BREQ_REQ_STATUS = false, 'NO', 'REJECTED'))) as BREQ_BLOOD_STATUS
                                                      from blood_request where BREQ_UACC_ID={0} order by BREQ_DATE desc;", id);
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
@@ -508,9 +510,9 @@ namespace User.Database
                                                     if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
                                                     if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
                                                     if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,
-                                                    if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
-                                                    if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
-                                                    if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
+                                                    if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, '---', 
+                                                    if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'YES', 
+                                                    if(BD_REQ_STATUS = false, 'REJECTED', 'NO'))) as BD_BLOOD_STATUS
                                                      from blood_donation where BD_UACC_ID={0} order by BD_DATE desc;", id);
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
@@ -564,7 +566,7 @@ namespace User.Database
                 cmd = con.CreateCommand();
                 cmd.CommandText = query;
                 rdr = cmd.ExecuteReader();
-                while(rdr.Read() && !rdr.IsDBNull(0))
+                while (rdr.Read() && !rdr.IsDBNull(0))
                 {
                     notifications n = new notifications();
                     n.NTF_ID = rdr["NTF_ID"].ToString();
@@ -579,7 +581,7 @@ namespace User.Database
                 rdr.Close();
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Get Notification List error : " + ex.Message);
             }
@@ -599,7 +601,7 @@ namespace User.Database
                 res = Convert.ToInt32(cmd.ExecuteScalar());
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Get Unread Notification COunt Error : " + ex.Message);
             }
@@ -664,9 +666,9 @@ namespace User.Database
                 Debug.Print(string.Format(@"select * from notifications where NTF_ID={0};", id));
                 cmd.CommandText = string.Format(@"select * from notifications where NTF_ID={0};", id);
                 rdr = cmd.ExecuteReader();
-                if(rdr.Read())
+                if (rdr.Read())
                 {
-                    if(!rdr.IsDBNull(0))
+                    if (!rdr.IsDBNull(0))
                     {
                         res.NTF_ID = rdr["NTF_ID"].ToString();
                         res.NTF_SUBJECT = rdr["NTF_SUBJECT"].ToString();
@@ -680,7 +682,7 @@ namespace User.Database
                 rdr.Close();
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Search Notification Error : " + ex.Message);
             }
@@ -699,20 +701,71 @@ namespace User.Database
                 Debug.Print(string.Format(@"update notifications set NTF_STATUS=true where NTF_ID={0};", id));
                 cmd.CommandText = string.Format(@"update notifications set NTF_STATUS=true where NTF_ID={0};", id);
                 int x = cmd.ExecuteNonQuery();
-                if(x > 0)
+                if (x > 0)
                 {
                     Debug.Print("Success");
                     res = false;
                 }
                 con.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Print("Update Notification Status Error : " + ex.Message);
             }
             return res;
         }
 
+        public bool InsertUserMessage(user_account ub, int RecID, string message)
+        {
+            int n = 1;
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
 
+                //walay existing
+                cmd.CommandText = string.Format(@"insert into message(MESSAGE_NAME,MESSAGE_SENDER_ID, MESSAGE_RECEIVER_ID,MESSAGE_CONTENT) values('{0}',{1},{2}, '{3}');",ub.UACC_FIRST, ub.UACC_ID, RecID, message);
+                int x = cmd.ExecuteNonQuery();
+                if (x > 0)
+                {
+                    res = true;
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Insert Message Error : " + ex.Message);
+            }
+            return res;
+
+        }
+
+
+        public DataTable MessageReapeater(int RecID, int SendID, string emailR)
+        {
+            // cmd.CommandText = string.Format(@"select * from message join user_account on MESSAGE_SENDER_ID=UACC_ID  or MESSAGE_SENDER_ID={0} where MESSAGE_RECEIVER_ID=UACC_ID or MESSAGE_RECEIVER_ID={1} ;", RecID, RecID);
+
+            DataTable dt = new DataTable();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = string.Format(@"select * from message  where MESSAGE_SENDER_ID={0} and MESSAGE_RECEIVER_ID={1} or  MESSAGE_SENDER_ID={2} and MESSAGE_RECEIVER_ID={3};", SendID,RecID, RecID,SendID);
+                da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+
+                Debug.Print("Sample Repeater Error : " + ex.Message);
+            }
+            return dt;
+
+        }
     }
 }

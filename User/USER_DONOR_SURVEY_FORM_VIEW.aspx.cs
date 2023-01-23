@@ -43,21 +43,21 @@ namespace User
             DonorSurvey ds = JsonConvert.DeserializeObject<DonorSurvey>(bd.BD_JSON_SURVEY_FORM);
 
             //Basic/Personal Information
-            ViewState["panelname"] = ds.personalInfo.PanelName;
-            ViewState["donorname"] = ds.personalInfo.DonorName;
-            ViewState["familyname"] = ds.personalInfo.FamilyName;
-            ViewState["firstname"] = ds.personalInfo.FirstName;
-            ViewState["title"] = ds.personalInfo.Title;
-            ViewState["idno"] = ds.personalInfo.IDNo;
-            ViewState["dob"] = ds.personalInfo.DateOfBirth;
+            ViewState["familyname"] = ds.personalInfo.Lname;
+            ViewState["firstname"] = ds.personalInfo.Fname;
+            ViewState["middlename"] = ds.personalInfo.Mname;
             ViewState["gender"] = ds.personalInfo.Gender;
-            ViewState["occupation"] = ds.personalInfo.Occupation;
-            ViewState["resaddress"] = ds.personalInfo.ResidentialAddress; ;
-            ViewState["posaddress"] = ds.personalInfo.PostalAddress;
-            ViewState["home"] = (ds.personalInfo.Home);
-            ViewState["work"] = ds.personalInfo.Work;
-            ViewState["mobile"] = ds.personalInfo.Mobile;
-            ViewState["email"] = ds.personalInfo.EmailAddress;
+            ViewState["month"] = ds.personalInfo.Month;
+            ViewState["day"] = ds.personalInfo.Day;
+            ViewState["year"] = ds.personalInfo.Year;
+            ViewState["street"] = ds.personalInfo.Street;
+            ViewState["barangay"] = ds.personalInfo.Barangay;
+            ViewState["city"] = ds.personalInfo.City; ;
+            ViewState["province"] = ds.personalInfo.Province;
+            ViewState["zip"] = ds.personalInfo.Zip;
+            ViewState["homenum"] = ds.personalInfo.Homenum;
+            ViewState["mobilenum"] = ds.personalInfo.Mobilenum;
+            ViewState["email"] = ds.personalInfo.Email;
 
             //Response.Write("<script>alert('" + ds.healthAssessment.N16d + "')</script>");
             //

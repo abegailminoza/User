@@ -146,10 +146,10 @@
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="BREQ_ID" />
                                         <asp:BoundField HeaderText="REQUESTOR" DataField="BREQ_UACC_ID" />
-                                        <asp:BoundField HeaderText="SURVEY STATUS" DataField="BREQ_SURVEY_STATUS" />
-                                        <asp:BoundField HeaderText="BLOOD STATUS" DataField="BREQ_BLOOD_STATUS" />
+                                        <asp:BoundField HeaderText="REQUEST STATUS" DataField="BREQ_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="CLAIMED" DataField="BREQ_BLOOD_STATUS" />
                                         <asp:BoundField HeaderText="DATE" DataField="BREQ_DATE" />
-                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
+                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

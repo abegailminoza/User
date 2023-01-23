@@ -46,21 +46,22 @@ namespace User
             DonorSurvey ds = new DonorSurvey();
 
             //Basic/Personal Information
-            ds.personalInfo.PanelName = Request.Form["panelname"].ToString();
-            ds.personalInfo.DonorName = Request.Form["donorname"].ToString();
-            ds.personalInfo.FamilyName = Request.Form["familyname"].ToString();
-            ds.personalInfo.FirstName = Request.Form["firstname"].ToString();
-            ds.personalInfo.Title = Request.Form["title"].ToString();
-            ds.personalInfo.IDNo = Request.Form["idno"].ToString();
-            ds.personalInfo.DateOfBirth = Request.Form["dob"].ToString();
-            ds.personalInfo.Gender = Request.Form["gender"].ToString();
-            ds.personalInfo.Occupation = Request.Form["occupation"].ToString();
-            ds.personalInfo.ResidentialAddress = Request.Form["resaddress"].ToString();
-            ds.personalInfo.PostalAddress = Request.Form["posaddress"].ToString();
-            ds.personalInfo.Home = Request.Form["home"].ToString();
-            ds.personalInfo.Work = Request.Form["work"].ToString();
-            ds.personalInfo.Mobile = Request.Form["mobile"].ToString();
-            ds.personalInfo.EmailAddress = Request.Form["email"].ToString();
+            ds.personalInfo.Lname = Request.Form["familyname"].ToString();
+            ds.personalInfo.Fname = Request.Form["firstname"].ToString();
+            ds.personalInfo.Mname = Request.Form["middlename"].ToString();
+            ds.personalInfo.Month = Request.Form["month"].ToString();
+            ds.personalInfo.Day = Request.Form["day"].ToString();
+            ds.personalInfo.Year = Request.Form["year"].ToString();
+            ds.personalInfo.Gender = Request.Form["Sex"].ToString();
+            ds.personalInfo.Street = Request.Form["street"].ToString();
+            ds.personalInfo.Barangay = Request.Form["barangay"].ToString();
+            ds.personalInfo.City = Request.Form["city"].ToString();
+            ds.personalInfo.Province = Request.Form["province"].ToString();
+            ds.personalInfo.Zip = Request.Form["zip"].ToString();
+            ds.personalInfo.Homenum = Request.Form["Home"].ToString();
+            ds.personalInfo.Mobilenum = Request.Form["Mobile"].ToString();
+            ds.personalInfo.Email = Request.Form["email"].ToString();
+          
 
             //1st Part of the Survey
             ds.healthAssessment.N11 = Request.Form["rd11"].ToString();
@@ -215,5 +216,10 @@ namespace User
             Server.Transfer("~/Default.aspx");
         }
 
+        protected void rd11n_CheckedChanged(object sender, EventArgs e)
+        {
+            Response.Write("<script>alert('Fill Up The Form after You Get Well.')</script>");
+            Server.Transfer("~/USER_BECOMEADONOR.aspx", false);
+        }
     }
 }

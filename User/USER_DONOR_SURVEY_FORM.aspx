@@ -159,63 +159,115 @@
                     </div>
                 </nav>
                 <div class="container-fluid d-flex" style="justify-content: center; align-items: center;">
-                    <div class="card text-center" style="max-height: 500px; height: 500px; width: 80%;">
+                    <div class="card text-center" style="max-height: 800px; height: 800px; width: 80%;">
                         <div class="card-header">
-                            <h2>BLOOD TRANSFUSION SERVICE</h2>
-                            <h3>DONOR QUESTIONNAIRE</h3>
+                            <h2>BLOOD DONOR FORM</h2>
+                            <h3>QUESTIONNAIRE</h3>
                         </div>
                         <div class="card-body">
-                            <div style="max-height: 300px; overflow: auto;">
+                            <div style="max-height: 600px; overflow: auto;">
                                 <p style="font-size: 25px; font-style: bold; margin-left: -30%">
                                     Please complete this form
                                 </p>
-                                <table style="text-align: left; width: 50%; margin: auto">
-                                    <tr>
-                                        <td>Panel name:</td>
-                                        <td>
-                                            <input type="text" id="panelname" name="panelname" required="" value=" <%=ViewState["panelname"] %>" /></td>
-                                        <td>Donor name:</td>
-                                        <td>
-                                            <input type="text" id="donorname" name="donorname" required="" value=" <%=ViewState["donorname"] %>" /></td>
-                                    </tr>
-                                    <tr>
+                                <table style="text-align: left; width: 53%; margin: auto">
+                                   <tr>
                                         <td>Family name:</td>
                                         <td>
-                                            <input type="text" id="familyname" name="familyname" required="" value=" <%=ViewState["familyname"] %>" /></td>
-                                        <td>First name:</td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="familyname" name="familyname" required="" /></td>
+                                        </tr>
+                                    <tr>
+                                       <td>First name:</td>
                                         <td>
-                                            <input type="text" id="firstname" name="firstname" required="" value=" <%=ViewState["firstname"] %>" /></td>
+                                            <asp:TextBox runat="server"   Class="form-control" type="text" ID="firstname" name="firstname" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Title:</td>
+                                        <td>Middle name:</td>
                                         <td>
-                                            <input type="text" id="title" name="title" required="" value=" <%=ViewState["title"] %>" /></td>
-                                        <td>ID No:&nbsp;</td>
-                                        <td>
-                                            <input type="text" id="idno" name="idno" required="" value=" <%=ViewState["idno"] %>" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="middlename" name="midname" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Date of birth:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr><td>Date of birth:</td></tr>
+                                    <tr>
+                                        <td>Month</td>
                                         <td>
-                                            <input type="date" id="dob" name="dob" required="" value=" <%=ViewState["dob"] %>" /></td>
+                                            <asp:DropDownList ID="month" runat="server" Class="form-control">
+                                                <asp:ListItem>January</asp:ListItem>
+                                                <asp:ListItem>Febraury</asp:ListItem>
+                                                <asp:ListItem>March</asp:ListItem>
+                                                <asp:ListItem>April</asp:ListItem>
+                                                <asp:ListItem>May</asp:ListItem>
+                                                <asp:ListItem>June</asp:ListItem>
+                                                <asp:ListItem>July</asp:ListItem>
+                                                <asp:ListItem>August</asp:ListItem>
+                                                <asp:ListItem>September</asp:ListItem>
+                                                <asp:ListItem>October</asp:ListItem>
+                                                <asp:ListItem>November</asp:ListItem>
+                                                <asp:ListItem>December</asp:ListItem>
+                                            </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                        <td>Day</td>
+                                        <td>
+                                            <asp:TextBox runat="server" Class="form-control" type="number" ID="day" name="dateofbirth" required="" />
+
+                                        </td>
+                                        </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>
+                                            <asp:TextBox runat="server" Class="form-control" type="year" ID="year" name="dateofbirth" required="" /></td>
+                                         
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td>Gender:</td>
                                         <td>
-                                            <input type="text" id="gender" name="gender" required="" value=" <%=ViewState["gender"] %>" /></td>
+                                            <asp:DropDownList ID="Sex" runat="server" Class="form-control">
+                                                <asp:ListItem>Female</asp:ListItem>
+                                                <asp:ListItem>Male</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                   
+                                    <tr>
+                                        <td>
+                                            <br />
+                                            Residential Address:.</td>
                                     </tr>
                                     <tr>
-                                        <td>Occupation:</td>
+                                        
+
+                                        <td>Street/Sector </td>
                                         <td>
-                                            <input type="text" id="occupation" name="occupation" required="" value=" <%=ViewState["occupation"] %>" /></td>
+                                            <asp:TextBox runat="server" Class="form-control" type="text" ID="street" name="resaddress" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
-                                        <td>Residential Address:</td>
+                                        <td>Barangay</td>
                                         <td>
-                                            <input type="text" id="resaddress" name="resaddress" required="" value=" <%=ViewState["resaddress"] %>" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="barangay" name="posaddress" required="" ></asp:TextBox></td>
+                                    </tr>
+                                     <tr>
+                                        <td>City</td>
+                                        <td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="city" name="city" required=""  ></asp:TextBox></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Province</td>
+                                        <td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="province" name="posaddress" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Postal Address:</td>
+                                        <td>ZIP Code</td>
                                         <td>
-                                            <input type="text" id="posaddress" name="posaddress" required="" value=" <%=ViewState["posaddress"] %>" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="number" ID="zip" name="posaddress" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -225,21 +277,17 @@
                                     <tr>
                                         <td>Home:</td>
                                         <td>
-                                            <input type="number" id="home" name="home" required="" value=" <%= Convert.ToInt32(ViewState["home"]) %>" /></td>
-                                        <td>Work:</td>
-                                        <td>
-                                            <input type="number" id="work" name="work" required="" value=" <%= Convert.ToInt32(ViewState["work"]) %>" /></td>
+                                            <asp:TextBox runat="server" Class="form-control" type="number" ID="Home" name="home" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>Mobile:</td>
                                         <td>
-                                            <input type="number" id="mobile" name="mobile" required="" value=" <%= Convert.ToInt32(ViewState["mobile"]) %>" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="number" ID="Mobile" name="mobile" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <input type="text" id="email" name="email" required="" value=" <%=ViewState["email"] %>" />
-                                        </td>
+                                            <asp:TextBox runat="server" Class="form-control" type="email" ID="Email" name="email"  required=""></asp:TextBox></td>
                                     </tr>
                                 </table>
                                 <p style="font-size: 25px; font-style: bold; margin-left: -30%">
@@ -260,9 +308,9 @@
                                         <td>1.1</td>
                                         <td>Are you feeling well and in good health today?</td>
                                         <td>
-                                            <input type="radio" id="1.1Y" name="rd11" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" type="radio" ID="rd11y" GroupName="rd11" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.1N" name="rd11" value="no" required="" /></td>
+                                            <asp:RadioButton OnCheckedChanged="rd11n_CheckedChanged" AutoPostBack="true" runat="server" type="radio" ID="rd11n" GroupName="rd11" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.2</td>
