@@ -145,10 +145,10 @@
                                                     <div class="col">
                                                         <div class="row d-flex flex-column">
                                                             <div class="col">
-                                                                <h1 class="fs-3"><%# Eval("BLOG_UACC_NAME") %></h1>
+                                                                <h3 class="fs-3"><%# Eval("BLOG_UACC_NAME") %></h3>
                                                             </div>
                                                             <div class="col d-flex" style="flex-direction: column">
-                                                                <h3 class="text-lowercase fs-5"><%# Eval("BLOG_UACC_EMAIL") %></h3>
+                                                                <h4 class="text-lowercase fs-5"><%# Eval("BLOG_UACC_EMAIL") %></h4>
                                                                 <h5><%# Eval("BLOG_DATE") %></h5>
                                                             </div>
                                                         </div>

@@ -221,6 +221,8 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\adminlifepoints-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\adminlifepoints-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\userlifepoints-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\userlifepoints-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
