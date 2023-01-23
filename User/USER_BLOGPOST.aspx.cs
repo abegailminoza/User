@@ -113,21 +113,23 @@ namespace User
 
                 PostPanel.Visible = false;
                 MessagePanel.Visible = true;
-                
 
-                 DataTable dt = Session["BlogPosts"] as DataTable;
+
+                DataTable dt = Session["BlogPosts"] as DataTable;
                 DataRow[] row = dt.Select("BLOG_ID='" + e.CommandArgument + "'");
 
-                string reporter;
-                int id;
+                string reporter="";
+                int id = 0;
 
                 if (row.Length > 0)
                 {
                     reporter = row[0]["BLOG_UACC_EMAIL"].ToString();
                     id = Convert.ToInt32(row[0]["BLOG_UACC_ID"]);
-                    ReceiverEmail.Text = reporter;
-                    ReceiverID.Text = id.ToString();
+                   
                 }
+
+                ReceiverEmail.Text = reporter;
+                ReceiverID.Text = id.ToString();
 
                 PopulatemMessage();
 
