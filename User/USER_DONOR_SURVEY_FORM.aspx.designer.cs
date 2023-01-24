@@ -195,6 +195,24 @@ namespace User
         protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
+        /// rd11y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rd11y;
+
+        /// <summary>
+        /// rd11n control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rd11n;
+
+        /// <summary>
         /// SubmitSurvey control.
         /// </summary>
         /// <remarks>

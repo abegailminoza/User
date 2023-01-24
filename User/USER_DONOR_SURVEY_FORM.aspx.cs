@@ -216,5 +216,10 @@ namespace User
             Server.Transfer("~/Default.aspx");
         }
 
+        protected void rd11n_CheckedChanged(object sender, EventArgs e)
+        {
+            Response.Write("<script>alert('Fill Up The Form after You Get Well.')</script>");
+            Server.Transfer("~/USER_BECOMEADONOR.aspx", false);
+        }
     }
 }

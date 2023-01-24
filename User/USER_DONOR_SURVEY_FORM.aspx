@@ -280,9 +280,9 @@
                                         <td>1.1</td>
                                         <td>Are you feeling well and in good health today?</td>
                                         <td>
-                                            <input type="radio" id="1.1Y" name="rd11" value="yes" required="" /></td>
+                                            <asp:RadioButton runat="server" type="radio" ID="rd11y" GroupName="rd11" value="yes" required="" /></td>
                                         <td>
-                                            <input type="radio" id="1.1N" name="rd11" value="no" required="" /></td>
+                                            <asp:RadioButton OnCheckedChanged="rd11n_CheckedChanged" AutoPostBack="true" runat="server" type="radio" ID="rd11n" GroupName="rd11" value="no" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>1.2</td>

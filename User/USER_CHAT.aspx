@@ -26,7 +26,7 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
+    <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32); color: var(--bs-red);">
             <div class="container-fluid d-flex flex-column p-0">
                 <img src="assets/img/321479999_548324667206662_5830804446592810955_n.png" width="92" height="92" style="margin-top: 30px;"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -55,14 +55,14 @@
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <form class="me-auto navbar-search w-100">
+                                    <div class="me-auto navbar-search w-100">
                                         <div class="input-group">
                                             <input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -242,7 +242,7 @@
             </footer>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
+    </form>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
