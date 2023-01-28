@@ -81,18 +81,7 @@ namespace User
 
         private void CheckUserBloodRequestsHistory()
         {
-            user_account ua = Session["USER"] as user_account;
-
-            if(db.CheckUserBloodRequests(ua.UACC_ID))
-            {
-                Debug.Print("Show Button");
-                RequestBloodBtn.Visible = true;
-            }
-            else
-            {
-                Debug.Print("Do not Show Button");
-                RequestBloodBtn.Visible = false;
-            }
+           
         }
 
         protected void GridUserBloodRequest_SelectedIndexChanged(object sender, EventArgs e)

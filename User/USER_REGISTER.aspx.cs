@@ -52,9 +52,9 @@ namespace User
 
                         //Insert to User Account Logs
                         user_logs ul = new user_logs();
-                        ul.ULOG_UACC_ID = res.ToString();
-                        ul.ULOG_EVENT = "Account Registration";
-                        string query = string.Format("insert into user_logs(ULOG_EVENT, ULOG_UACC_ID) values('{0}', {1});", ul.ULOG_EVENT, ul.ULOG_UACC_ID);
+                        ul.ULOG_UACC_ID = ua.UACC_ID;
+                        ul.ULOG_EVENT = string.Format("'{0}' '{1}' Registered",ua.UACC_FIRST, ua.UACC_LAST);
+                        string query = string.Format("insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID) values('{0}', {1});", ul.ULOG_EVENT, ul.ULOG_UACC_ID);
                         bool logs = db.InsertToUserLogs(query);
                         if (logs)
                         {

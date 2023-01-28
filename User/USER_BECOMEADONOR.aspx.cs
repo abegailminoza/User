@@ -134,15 +134,19 @@ namespace User
 
             br.BD_UACC_ID = ua.UACC_ID;
 
-            if (db.ClickDonationrequest(br))
+            int res = db.ClickDonationrequest(br);
+            Debug.Print("Result After DB : " + res);
+            switch (res)
             {
-                //Successfullu Inseryted
-                Response.Redirect("~/USER_DONOR_SURVEY_FORM.aspx");
-            }
-            else
-            {
-                Response.Write("<script>alert('You have already made a request. Wait till the process is completed.')</script>");
-
+                case 1: //Success
+                    Response.Redirect("~/USER_DONOR_SURVEY_FORM.aspx");
+                    break;
+                case -2:
+                    Response.Write("<script>alert('You are only allowed to donate again after 3 months.')</script>");
+                    break;
+                case -1:
+                    Response.Write("<script>alert('You have already made a request. Wait till the process is completed.')</script>");
+                    break;
             }
 
         }

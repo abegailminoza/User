@@ -97,9 +97,9 @@ namespace User.Database
                 if (x <= 0)
                 {
                     //No Duplicates
-                    cmd.CommandText = string.Format(@"insert into user_account(UACC_FIRST, UACC_MIDDLE, UACC_LAST, UACC_EMAIL, UACC_PASSWORD) 
-                                                values('{0}', '{1}', '{2}', '{3}', '{4}');",
-                                                ua.UACC_FIRST, ua.UACC_MIDDLE, ua.UACC_LAST, ua.UACC_EMAIL, ua.UACC_PASSWORD);
+                    cmd.CommandText = string.Format(@"insert into user_account(UACC_FIRST, UACC_MIDDLE, UACC_LAST, UACC_EMAIL, UACC_PASSWORD,UACC_REQUESTOR,UACC_STATUS,UACC_DONOR) 
+                                                values('{0}', '{1}', '{2}', '{3}', '{4}',{5},{6},{7});",
+                                                ua.UACC_FIRST, ua.UACC_MIDDLE, ua.UACC_LAST, ua.UACC_EMAIL, ua.UACC_PASSWORD,false,true,false);
                     int y = cmd.ExecuteNonQuery();
                     if (y > 0)
                     {
@@ -299,8 +299,12 @@ namespace User.Database
                     //walay existing
                     cmd.CommandText = string.Format("insert into blood_request(BREQ_JSON_SURVEY_FORM, BREQ_UACC_ID) values('{0}', {1});", br.BREQ_JSON_SURVEY_FORM, br.BREQ_UACC_ID);
                     int x = cmd.ExecuteNonQuery();
+                   
+
                     if (x > 0)
                     {
+                        cmd.CommandText = string.Format(@"update user_account set UACC_REQUESTOR=true where UACC_ID={0};", br.BREQ_UACC_ID);
+                        int y = cmd.ExecuteNonQuery();
                         res = true;
                     }
                 }
@@ -368,7 +372,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE,
+                cmd.CommandText = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE,BREQ_VISIT_DATE,
                                                     if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
                                                     if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
                                                     if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
@@ -396,7 +400,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_REQ_STATUS=true;", id);
+                cmd.CommandText = string.Format("select count(*) from blood_request where BREQ_UACC_ID={0} and ((BREQ_BLOOD_STATUS=true and BREQ_REQ_STATUS=true) or (BREQ_BLOOD_STATUS=false and BREQ_REQ_STATUS=false));", id);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck > 0)
                 {
@@ -472,20 +476,49 @@ namespace User.Database
             }
             return res;
         }
-        public bool ClickDonationrequest(blood_donation br)
+        public int ClickDonationrequest(blood_donation br)
         {
-            bool res = false;
+            int res = -1;
             try
             {
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and BD_BLOOD_STATUS=false", br.BD_UACC_ID);
+                cmd.CommandText = string.Format("select count(*) from blood_donation where BD_UACC_ID={0} and ((BD_SURVEY_STATUS=false or BD_BLOOD_STATUS=false) and BD_REQ_STATUS=true)", br.BD_UACC_ID);
                 int chck = Convert.ToInt32(cmd.ExecuteScalar());
                 if (chck <= 0)
                 {
+                    cmd.CommandText = "select count(*) from blood_donation where BD_UACC_ID=" + br.BD_UACC_ID;
+                    int row = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (row > 0)
+                    {
+                        cmd.CommandText = "select * from blood_donation where BD_UACC_ID=" + br.BD_UACC_ID + " order by BD_DATE desc;";
+                        rdr = cmd.ExecuteReader();
+                        if (rdr.Read())
+                        {
+                            if (!rdr.IsDBNull(0))
+                            {
+                                DateTime t = Convert.ToDateTime(rdr["BD_DATE"]);
+                                TimeSpan limit = TimeSpan.FromDays(90);
+                                Debug.Print("Date Res : " + (DateTime.Now - t));
+                                Debug.Print("Date Res BOOl : " + ((DateTime.Now - t) >= limit));
+                                if (DateTime.Now - t >= limit)
+                                {
+                                    res = 1;
+                                }
+                                else
+                                {
+                                    res = -2;
+                                }
+                            }
+                        }
+                        rdr.Close();
+                    }
+                    else
+                    {
+                        res = 1;
+                    }
 
-                    res = true;
 
                 }
                 con.Close();
@@ -506,7 +539,7 @@ namespace User.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE,
+                cmd.CommandText = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE,BD_VISIT_DATE,
                                                     if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
                                                     if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
                                                     if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,

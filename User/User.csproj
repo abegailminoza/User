@@ -171,6 +171,7 @@
     <Content Include="assets\img\avatars\avatar4.jpeg" />
     <Content Include="assets\img\avatars\avatar5.jpeg" />
     <Content Include="assets\img\avatars\icons8-user-60.png" />
+    <Content Include="assets\img\background.jpg" />
     <Content Include="assets\img\close.png" />
     <Content Include="assets\img\dislike.png" />
     <Content Include="assets\img\dogs\icons8-user-60.png" />

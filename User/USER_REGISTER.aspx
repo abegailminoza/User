@@ -7,7 +7,7 @@
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Register</title>
+    <title>Register | LifePoints</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -24,8 +24,10 @@
     <link rel="stylesheet" href="assets/css/Ludens-basic-login.css" />
     <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css" />
     <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css" />
-    <script type="text/javascript">
-        let email = document.getElementById("email")
+
+
+        <script type = "text/javascript" >
+                let email = document.getElementById("email")
         let password = document.getElementById("password")
         let verifyPassword = document.getElementById("verifyPassword")
         let submitBtn = document.getElementById("submitBtn")
@@ -60,6 +62,27 @@
                     submitBtn.disabled = false
             }
         }
+            function showHidePassword() {
+                var x = document.getElementById("Password");
+                var eye = document.getElementsByClassName("fa-eye")[0];
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+
+            function showHidePassword() {
+                var x = document.getElementById("Password");
+                var icon = document.querySelector('.fa-eye');
+                if (x.type === "password") {
+                    x.type = "text";
+                    icon.classList.add("view");
+                } else {
+                    x.type = "password";
+                    icon.classList.remove("view");
+                }
+            }
 
         // Validate password upon change
         password.addEventListener("change", function () {
@@ -101,6 +124,16 @@
                 displayErrorMsg("email", "Invalid email")
         });
     </script>
+
+      <style>
+        label[for="show-password"] {
+        margin-top: 10px;
+}
+
+        .mb-3 {
+        padding-top: 10px;
+}
+    </style>
 </head>
 
 <body style="background: rgb(119,40,32);">
@@ -127,17 +160,20 @@
                         <div class="mb-3">
                             <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Email" placeholder="Email Address*" required="*" style="width: 434.609px;" inputmode="email" title="Email Address" />
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Password" placeholder="Password" required="" title="Password" />
+                        <div class="mb-3">
+                            
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="Password" placeholder="Password" required="" Style="width: 434.609px;" title="Password" />
+                              <label for="show-password">
+                                    <input type="checkbox" id="show-password" onchange="showHidePassword()"> Show Password
+                                </label>
+                            
                             </div>
-                            <div class="col-sm-6">
-                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="RepeatPassword" placeholder="Confirm Password" required="" title="Repeat Password" />
-                            </div>
+                        <div class="mb-3">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="RepeatPassword" placeholder="Confirm Password" required="" Style="width: 434.609px;" title="Repeat Password" />
                         </div>
                         <div class="row mb-3">
                             <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
-                            <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
+                            <p id="PasswordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
                         </div>
                         <asp:Button runat="server" ID="RegisterBtn" OnClick="RegisterBtn_Click" Class="btn btn-primary d-block btn-user w-100" Text="Register Account" UseSubmitBehavior="true" AutoPostBack="true" style="background: rgb(119,40,32);" />
                         <hr>

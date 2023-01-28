@@ -7,7 +7,7 @@
 <head runat="server">
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Update Profile</title>
+    <title>Update Profile | LifePoints</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Almarai&amp;display=swap" />
@@ -24,83 +24,115 @@
     <link rel="stylesheet" href="assets/css/Ludens-basic-login.css" />
     <link rel="stylesheet" href="assets/css/Ludens-Users---1-Login.css" />
     <link rel="stylesheet" href="assets/css/Simple-Bootstrap-Chat.css" />
-    <script type="text/javascript">
-        let email = document.getElementById("email")
-        let password = document.getElementById("password")
-        let verifyPassword = document.getElementById("verifyPassword")
-        let submitBtn = document.getElementById("submitBtn")
-        let emailErrorMsg = document.getElementById('emailErrorMsg')
-        let passwordErrorMsg = document.getElementById('passwordErrorMsg')
 
-        function displayErrorMsg(type, msg) {
-            if (type == "email") {
-                emailErrorMsg.style.display = "block"
-                emailErrorMsg.innerHTML = msg
-                submitBtn.disabled = true
+        <script type = "text/javascript" >
+            let email = document.getElementById("email")
+            let password = document.getElementById("password")
+            let verifyPassword = document.getElementById("verifyPassword")
+            let submitBtn = document.getElementById("submitBtn")
+            let emailErrorMsg = document.getElementById('emailErrorMsg')
+            let passwordErrorMsg = document.getElementById('passwordErrorMsg')
+
+            function displayErrorMsg(type, msg) {
+                if (type == "email") {
+                    emailErrorMsg.style.display = "block"
+                    emailErrorMsg.innerHTML = msg
+                    submitBtn.disabled = true
+                }
+                else {
+                    passwordErrorMsg.style.display = "block"
+                    passwordErrorMsg.innerHTML = msg
+                    submitBtn.disabled = true
+                }
             }
-            else {
-                passwordErrorMsg.style.display = "block"
-                passwordErrorMsg.innerHTML = msg
-                submitBtn.disabled = true
+
+            function hideErrorMsg(type) {
+                if (type == "email") {
+                    emailErrorMsg.style.display = "none"
+                    emailErrorMsg.innerHTML = ""
+                    submitBtn.disabled = true
+                    if (passwordErrorMsg.innerHTML == "")
+                        submitBtn.disabled = false
+                }
+                else {
+                    passwordErrorMsg.style.display = "none"
+                    passwordErrorMsg.innerHTML = ""
+                    if (emailErrorMsg.innerHTML == "")
+                        submitBtn.disabled = false
+                }
             }
-        }
-
-        function hideErrorMsg(type) {
-            if (type == "email") {
-                emailErrorMsg.style.display = "none"
-                emailErrorMsg.innerHTML = ""
-                submitBtn.disabled = true
-                if (passwordErrorMsg.innerHTML == "")
-                    submitBtn.disabled = false
+            function showHidePassword() {
+                var x = document.getElementById("Password");
+                var eye = document.getElementsByClassName("fa-eye")[0];
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
             }
-            else {
-                passwordErrorMsg.style.display = "none"
-                passwordErrorMsg.innerHTML = ""
-                if (emailErrorMsg.innerHTML == "")
-                    submitBtn.disabled = false
+
+            function showHidePassword() {
+                var x = document.getElementById("Password");
+                var icon = document.querySelector('.fa-eye');
+                if (x.type === "password") {
+                    x.type = "text";
+                    icon.classList.add("view");
+                } else {
+                    x.type = "password";
+                    icon.classList.remove("view");
+                }
             }
-        }
 
-        // Validate password upon change
-        password.addEventListener("change", function () {
+            // Validate password upon change
+            password.addEventListener("change", function () {
 
-            // If password has no value, then it won't be changed and no error will be displayed
-            if (password.value.length == 0 && verifyPassword.value.length == 0) hideErrorMsg("password")
+                // If password has no value, then it won't be changed and no error will be displayed
+                if (password.value.length == 0 && verifyPassword.value.length == 0) hideErrorMsg("password")
 
-            // If password has a value, then it will be checked. In this case the passwords don't match
-            else if (password.value !== verifyPassword.value) displayErrorMsg("password", "Passwords do not match")
+                // If password has a value, then it will be checked. In this case the passwords don't match
+                else if (password.value !== verifyPassword.value) displayErrorMsg("password", "Passwords do not match")
 
-            // When the passwords match, we check the length
-            else {
-                // Check if the password has 8 characters or more
-                if (password.value.length >= 8)
-                    hideErrorMsg("password")
+                // When the passwords match, we check the length
+                else {
+                    // Check if the password has 8 characters or more
+                    if (password.value.length >= 8)
+                        hideErrorMsg("password")
+                    else
+                        displayErrorMsg("password", "Password must be at least 8 characters long")
+                }
+            })
+
+            verifyPassword.addEventListener("change", function () {
+                if (password.value !== verifyPassword.value)
+                    displayErrorMsg("password", "Passwords do not match")
+                else {
+                    // Check if the password has 8 characters or more
+                    if (password.value.length >= 8)
+                        hideErrorMsg("password")
+                    else
+                        displayErrorMsg("password", "Password must be at least 8 characters long")
+                }
+            })
+
+            // Validate email upon change
+            email.addEventListener("change", function () {
+                // Check if the email is valid using a regular expression (string@string.string)
+                if (email.value.match(/^[^@]+@[^@]+\.[^@]+$/))
+                    hideErrorMsg("email")
                 else
-                    displayErrorMsg("password", "Password must be at least 8 characters long")
-            }
-        })
-
-        verifyPassword.addEventListener("change", function () {
-            if (password.value !== verifyPassword.value)
-                displayErrorMsg("password", "Passwords do not match")
-            else {
-                // Check if the password has 8 characters or more
-                if (password.value.length >= 8)
-                    hideErrorMsg("password")
-                else
-                    displayErrorMsg("password", "Password must be at least 8 characters long")
-            }
-        })
-
-        // Validate email upon change
-        email.addEventListener("change", function () {
-            // Check if the email is valid using a regular expression (string@string.string)
-            if (email.value.match(/^[^@]+@[^@]+\.[^@]+$/))
-                hideErrorMsg("email")
-            else
-                displayErrorMsg("email", "Invalid email")
-        });
+                    displayErrorMsg("email", "Invalid email")
+            });
     </script>
+
+      <style>
+        label[for="show-password"] {
+        margin-top: 10px;
+}
+
+        .mb-3 {
+        padding-top: 10px;
+}
+    </style>
 </head>
 
 <body style="background: rgb(119,40,32);">
@@ -113,7 +145,7 @@
                 </a>
                 <hr class="sidebar-divider my-0" />
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="USER_BLOGPOST.aspx"><i class="fas fa-tachometer-alt"></i><span>Blog Post</span></a></li>
                     
                     <li class="nav-item"><a class="nav-link" href="USER_REQUEST_A_BLOOD.aspx"><i class="fa fa-tint"></i><span>Request a Blood</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="USER_BECOMEADONOR.aspx"><i class="fa fa-heart"></i><span>Become a Blood Donor</span></a></li>
@@ -202,14 +234,14 @@
                                     <div class="mb-3">
                                         <asp:TextBox runat="server" Class="form-control form-control-user" type="email" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_EMAIL" placeholder="Email Address" required="*" Style="width: 434.609px;" inputmode="email" title="Email Address" />
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_PASS" placeholder="Password" required="" title="Password" />
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_RPASS" placeholder="Confirm Password" required="" title="Repeat Password" />
-                                        </div>
-                                    </div>
+                                    <div class="mb-3">
+                            
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_PASS" placeholder="Password" required="" inputmode="Password" Style="width: 434.609px;" title="Password" />
+                            
+                            </div>
+                        <div class="mb-3">
+                                <asp:TextBox runat="server" Class="form-control form-control-user" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" ID="UPD_RPASS" placeholder="Confirm Password" required="" inputmode="RepeatPassword" Style="width: 434.609px;" title="Repeat Password" />
+                        </div>
                                     <div class="row mb-3">
                                         <p id="emailErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
                                         <p id="passwordErrorMsg" class="text-danger" style="display: none;">Paragraph</p>
